@@ -91,10 +91,10 @@ export default function Modal({ data, editing, setEditing, perms }){
 
                 <SubHeader columns={[['Appraisals']]}/>
                 <SubHeader columns={[['Acquired', 2], ['Appraised', 2], ['%', 1]]}/>
-                <EditRow columns={[[parseInt(data.appraisals.acquired), 2, 'appraisals-acquired'], [parseInt(data.appraisals.appraised), 2, 'appraisals-appraised'], [(data.appraisals.acquired / data.appraisals.appraised).toFixed(2), 1, 'appraisals-percent']]} />
+                <EditRow columns={[[parseInt(data.appraisals.acquired), 2, 'appraisals-acquired'], [parseInt(data.appraisals.appraised), 2, 'appraisals-appraised'], [(data.appraisals.acquired * 100 / data.appraisals.appraised).toFixed(2), 1, 'appraisals-percent']]} />
 
                 <SubHeader columns={[['', 1], ['Shown', 2], ['Scheduled', 2], ['%', 1]]} />
-                <EditRow columns={[['Appointments', 1], [parseInt(data.appointments.shown), 2, 'appointments-shown'], [parseInt(data.appointments.scheduled), 2, 'appointments-scheduled'], [(data.appointments.shown / data.appointments.scheduled).toFixed(2), 1]]} />
+                <EditRow columns={[['Appointments', 1], [parseInt(data.appointments.shown), 2, 'appointments-shown'], [parseInt(data.appointments.scheduled), 2, 'appointments-scheduled'], [(data.appointments.shown * 100 / data.appointments.scheduled).toFixed(2), 1]]} />
                 <EditRow columns={[['Walk Ins', 1], [parseInt(data.appointments.walk_ins), 2, 'appointments-walk_ins'], ['', 3]]} />
                 <EditRow columns={[['Buy Backs', 1], [parseInt(data.appointments.buy_backs), 2, 'appointments-buy_backs'], ['', 3]]}/>
                 <EditRow columns={[['TOTAL', 1], [data.appointments.shown + data.appointments.buy_backs + data.appointments.walk_ins, 2], ['', 2], ['', 1]]} />
