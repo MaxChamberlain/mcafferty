@@ -34,18 +34,18 @@ export default function Modal({ data, editing, setEditing, perms }){
                     onClick={() => {
                         importDocument(data,
                             {
-                                units_new: document.getElementById('daily-units-new').value,
-                                units_used: document.getElementById('daily-units-used').value,
-                                gross_new: document.getElementById('daily-gross-new').value,
-                                gross_used: document.getElementById('daily-gross-used').value,
-                                appraisals_acquired: document.getElementById('appraisals-acquired').value,
-                                appraisals_appraised: document.getElementById('appraisals-appraised').value,
-                                appointments_shown: document.getElementById('appointments-shown').value,
-                                appointments_scheduled: document.getElementById('appointments-scheduled').value,
-                                appointments_walk_ins: document.getElementById('appointments-walk_ins').value,
-                                appointments_buy_backs: document.getElementById('appointments-buy_backs').value,
-                                phone_pops_new: document.getElementById('ph-pops-new').value,
-                                phone_pops_used: document.getElementById('ph-pops-used').value,
+                                units_new: document.getElementById('daily-units-new').value ?? null,
+                                units_used: document.getElementById('daily-units-used').value ?? null,
+                                gross_new: document.getElementById('daily-gross-new').value ?? null,
+                                gross_used: document.getElementById('daily-gross-used').value ?? null,
+                                appraisals_acquired: document.getElementById('appraisals-acquired').value ?? null,
+                                appraisals_appraised: document.getElementById('appraisals-appraised').value ?? null,
+                                appointments_shown: document.getElementById('appointments-shown').value ?? null,
+                                appointments_scheduled: document.getElementById('appointments-scheduled').value ?? null,
+                                appointments_walk_ins: document.getElementById('appointments-walk_ins').value ?? null,
+                                appointments_buy_backs: document.getElementById('appointments-buy_backs').value ?? null,
+                                phone_pops_new: document.getElementById('ph-pops-new').value ?? null,
+                                phone_pops_used: document.getElementById('ph-pops-used').value ?? null,
                             }
                         )
                         setEditing(null)
@@ -96,8 +96,8 @@ export default function Modal({ data, editing, setEditing, perms }){
                 <SubHeader columns={[['', 1], ['Shown', 2], ['Scheduled', 2], ['%', 1]]} />
                 <EditRow columns={[['Appointments', 1], [parseInt(data.appointments.shown), 2, 'appointments-shown'], [parseInt(data.appointments.scheduled), 2, 'appointments-scheduled'], [(data.appointments.shown / data.appointments.scheduled).toFixed(2), 1]]} />
                 <EditRow columns={[['Walk Ins', 1], [parseInt(data.appointments.walk_ins), 2, 'appointments-walk_ins'], ['', 3]]} />
-                <EditRow columns={[['Buy Backs', 1], [parseInt(data.appointments.buy_backs), 2], ['', 3]]}/>
-                <EditRow columns={[['TOTAL', 1], [data.appointments.shown + data.appointments.buy_backs + data.appointments.walk_ins, 2, 'appointments-buy_backs'], ['', 2], ['', 1]]} />
+                <EditRow columns={[['Buy Backs', 1], [parseInt(data.appointments.buy_backs), 2, 'appointments-buy_backs'], ['', 3]]}/>
+                <EditRow columns={[['TOTAL', 1], [data.appointments.shown + data.appointments.buy_backs + data.appointments.walk_ins, 2], ['', 2], ['', 1]]} />
 
                 <SubHeader columns={[['PH. Pops', 1]]} />
                 <EditRow columns={[['New', 1], [parseInt(data.phone_pops.new), 2, 'ph-pops-new']]} />
