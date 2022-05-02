@@ -1,0 +1,12 @@
+input{
+    transition: all .2s ease-out;
+    text-align: center;
+}
+input:focus{
+    outline: none;
+    text-align: left;
+}
+
+#submit:focus{
+    text-align: center;
+}
