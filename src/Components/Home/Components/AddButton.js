@@ -7,7 +7,8 @@ export default function AddButton({ adding, setAdding }){
             borderRadius: '100%',
             position: 'absolute',
             right: 30,
-            top: 100
+            top: 100,
+            zIndex: 9999
         }}
         onClick={() => setAdding(wasAdding => !wasAdding)}>
             <svg version="1.1" x="0px" y="0px" width="459.325px" height="459.325px" viewBox="0 0 459.325 459.325" style={{

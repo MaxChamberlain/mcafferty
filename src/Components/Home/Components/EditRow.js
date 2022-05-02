@@ -24,7 +24,9 @@ export default function EditRow({ columns }){
                         flex: e[1],
                         fontSize: 15,
                     }} 
-                    placeholder={e[0]}/>
+                    placeholder={e[0]}
+                    id={e[2]}
+                    type="number"/>
                 )
             })}
         </div>

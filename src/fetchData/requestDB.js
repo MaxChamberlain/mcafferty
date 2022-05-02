@@ -25,6 +25,110 @@ exports.getData = async (method, table, filter, criteria) => {
 
 
 
+exports.newDailyRecap = async (doc) => {
+
+  let query = {
+    "collection": 'daily_recap_reports',
+    "database": "mcafferty",
+    "dataSource": "Cluster0",
+    "document" : doc
+  }
+  
+  let config = {
+    method: 'post',
+    url: `${process.env.REACT_APP_PROXY_URL}${process.env.REACT_APP_DB_URL}insertOne`,
+    headers: { 
+      'Content-Type': 'application/json',   
+      'api-key': process.env.REACT_APP_DB_KEY
+    },
+    data : query
+  }
+  
+  const res = (await axios(config))
+}
+
+
+
+exports.deleteDailyRecap = async (id) => {
+
+  let query = {
+    "collection": 'daily_recap_reports',
+    "database": "mcafferty",
+    "dataSource": "Cluster0",
+    filter: {
+      "_id" : { "$oid" : id}
+    }
+  }
+  
+  let config = {
+    method: 'post',
+    url: `${process.env.REACT_APP_PROXY_URL}${process.env.REACT_APP_DB_URL}deleteOne`,
+    headers: { 
+      'Content-Type': 'application/json',   
+      'api-key': process.env.REACT_APP_DB_KEY
+    },
+    data : query
+  }
+  
+  const res = (await axios(config))
+}
+
+
+
+exports.updateDailyRecap = async (id, doc) => {
+
+  let query = {
+    "collection": 'daily_recap_reports',
+    "database": "mcafferty",
+    "dataSource": "Cluster0",
+    "filter": {
+      "_id" : { "$oid" : id}
+    },
+    "update" : {
+      "$set" : doc
+    }
+  }
+
+  console.log(query)
+  
+  let config = {
+    method: 'post',
+    url: `${process.env.REACT_APP_PROXY_URL}${process.env.REACT_APP_DB_URL}updateOne`,
+    headers: { 
+      'Content-Type': 'application/json',   
+      'api-key': process.env.REACT_APP_DB_KEY
+    },
+    data : query
+  }
+  
+  const res = (await axios(config))
+}
+
+
+
+exports.getDailyRecaps = async (doc) => {
+  let query = {
+    "collection": 'daily_recap_reports',
+    "database": "mcafferty",
+    "dataSource": "Cluster0"
+  }
+  
+  let config = {
+    method: 'post',
+    url: `${process.env.REACT_APP_PROXY_URL}${process.env.REACT_APP_DB_URL}find`,
+    headers: { 
+      'Content-Type': 'application/json',   
+      'api-key': process.env.REACT_APP_DB_KEY
+    },
+    data : query
+  }
+  
+  const res = (await axios(config))
+  return(res.data.documents)
+}
+
+
+
 exports.getUserInfo = async (email, password) => {
 
   let query = {

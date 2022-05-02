@@ -2,24 +2,19 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import AddButton from './Components/AddButton'
 import Modal from './Components/Modal'
-import { getUser } from "../../fetchData/requestDB";
+import NewModal from './Components/NewModal'
+import { getUser, newDailyRecap, getDailyRecaps } from "../../fetchData/requestDB";
 
 export default function Settings(){
     const [ perms, setPerms ] = useState(null)
     const [ adding, setAdding ] = useState(false)
     const [ editing, setEditing ] = useState(null)
+    const [ post, setPost ] = useState(null)
 
     useEffect(() => {
         getPerms()
+        getPost()
     }, [])
-
-    useEffect(() => {
-        console.log(editing)
-    }, [editing])
-
-    let e = {
-        date: '05/02/2022'
-    }
 
     return(
         <>
@@ -39,11 +34,19 @@ export default function Settings(){
                 {perms && <div style={{
                     marginTop: 80,
                 }}>
-                    <Modal perms={perms} e={e} setEditing={setEditing} editing={editing} />
+                    {adding && <NewModal setAdding={setAdding} />}
+                    {post && post.map(e => {
+                        return <Modal data={e} perms={perms}setEditing={setEditing} editing={editing} />
+                    })}
                 </div>}
             </motion.div>
         </>
     )
+
+    async function getPost(){
+        let data = await getDailyRecaps()
+        setPost(data)
+    }
 
     async function getPerms(){
         const email = document.cookie.split(';').map(e => {

@@ -384,7 +384,7 @@ export default function Settings(){
                                     Cancel
                                 </div>
                             </div>
-                                {perms.admin && 
+                                {(perms.admin || perms.delete) && 
                                 <div style={{
                                     backgroundColor: '#ff4242',
                                     color: 'white',
