@@ -1,7 +1,7 @@
 const axios = require("axios");
 const CryptoJS = require("crypto-js");
 
-exports.getData = async (method, table, filter, criteria) => {
+export const getData = async (method, table, filter, criteria) => {
 
   let query = {
     "collection": table,
@@ -25,7 +25,7 @@ exports.getData = async (method, table, filter, criteria) => {
 
 
 
-exports.newDailyRecap = async (doc) => {
+export const newDailyRecap = async (doc) => {
 
   let query = {
     "collection": 'daily_recap_reports',
@@ -49,7 +49,7 @@ exports.newDailyRecap = async (doc) => {
 
 
 
-exports.deleteDailyRecap = async (id) => {
+export const deleteDailyRecap = async (id) => {
 
   let query = {
     "collection": 'daily_recap_reports',
@@ -75,7 +75,7 @@ exports.deleteDailyRecap = async (id) => {
 
 
 
-exports.updateDailyRecap = async (id, doc) => {
+ export const updateDailyRecap = async (id, doc) => {
 
   let query = {
     "collection": 'daily_recap_reports',
@@ -106,7 +106,7 @@ exports.updateDailyRecap = async (id, doc) => {
 
 
 
-exports.getDailyRecaps = async (doc) => {
+export const getDailyRecaps = async (doc) => {
   let query = {
     "collection": 'daily_recap_reports',
     "database": "mcafferty",
@@ -129,7 +129,7 @@ exports.getDailyRecaps = async (doc) => {
 
 
 
-exports.getUserInfo = async (email, password) => {
+export const getUserInfo = async (email, password) => {
 
   let query = {
     "collection": 'users',
@@ -164,7 +164,7 @@ exports.getUserInfo = async (email, password) => {
 
 
 
-exports.getUser = async (email) => {
+export const getUser = async (email) => {
 
   let query = {
     "collection": 'users',
@@ -191,7 +191,7 @@ exports.getUser = async (email) => {
 
 
 
-exports.setUserPerms = async (id, permsToSet) => {
+export const setUserPerms = async (id, permsToSet) => {
 
   let query = {
     "collection": 'users',
@@ -222,7 +222,7 @@ exports.setUserPerms = async (id, permsToSet) => {
 
 
 
-exports.addUser = async (permsToSet, pass) => {
+export const addUser = async (permsToSet, pass) => {
 
   permsToSet.password = encrypt(permsToSet.password, process.env.REACT_APP_DB_KEY)
 
@@ -253,7 +253,7 @@ exports.addUser = async (permsToSet, pass) => {
 
 
 
-exports.getUsers = async () => {
+export const getUsers = async () => {
 
   let query = {
     "collection": 'users',
@@ -277,7 +277,7 @@ exports.getUsers = async () => {
 
 
 
-exports.removeUser = async (id) => {
+export const removeUser = async (id) => {
 
   let query = {
     "collection": 'users',
@@ -304,7 +304,7 @@ exports.removeUser = async (id) => {
 
 
 
-exports.setPass = async (email, pass) => {
+export const setPass = async (email, pass) => {
 
   let query = {
     "collection": 'users',
