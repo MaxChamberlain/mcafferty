@@ -7,7 +7,7 @@ export default function AddButton({ adding, setAdding }){
             borderRadius: '100%',
             position: 'absolute',
             right: 30,
-            top: 100,
+            top: 140,
             zIndex: 9999
         }}
         onClick={() => setAdding(wasAdding => !wasAdding)}>

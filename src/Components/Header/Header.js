@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import Logo from '../Logo'
 
 export default function Header(){
     return(
@@ -51,6 +52,14 @@ export default function Header(){
                     </g>
                 </svg>
             </NavLink>
+
+            <div style={{
+                width: '100vw',
+                display: 'flex',
+                justifyContent: 'center',
+            }}>
+                <Logo />
+            </div>
 
             <NavLink to='/'>
                 <svg version="1.1" id="Capa_1" x="0px" y="0px"

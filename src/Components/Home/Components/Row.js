@@ -10,6 +10,7 @@ export default function Row({ columns }){
             textAlign: 'center',
             display: 'flex',
             justifyContent: 'space-around',
+            borderBottom: '1px solid #ddd',
         }}>
             {columns.map(e => {
                 return (
