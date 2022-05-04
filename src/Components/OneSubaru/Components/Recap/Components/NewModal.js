@@ -1,4 +1,4 @@
-import { newDailyRecap } from "../../../fetchData/requestDB"
+import { newDailyRecap } from "../../../../../fetchData/requestDB"
 import SubHeader from './SubHeader'
 import Row from './Row'
 import EditRow from './EditRow'

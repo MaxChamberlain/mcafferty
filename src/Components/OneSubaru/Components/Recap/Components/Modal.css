@@ -1,0 +1,16 @@
+.slide-in-enter {
+    left: 100%;
+    transition: left 1500ms;
+    position: relative;
+  }
+  .slide-in-enter-active {
+    left: 0;
+  }
+  .slide-in-exit {
+    left: 0;
+    transition: left 1500ms;
+    position: relative;
+  }
+  .slide-in-exit-active {
+    left: 100%;
+  }

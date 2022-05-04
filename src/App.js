@@ -5,10 +5,15 @@ import Login from './Components/LoginPage/Login'
 import Header from './Components/Header/Header'
 import Home from './Components/Home/Home'
 import Settings from './Components/Settings/Settings'
+import OneSubaru from './Components/OneSubaru/OneSubaru'
+import RecapOneSubaru from './Components/OneSubaru/Components/Recap/RecapOneSubaru'
+import {useLocation} from "react-router-dom";
 
 export default function App() {
   const [ loggedIn, setLoggedIn ] = useState(false)
-  
+  const location = useLocation()
+
+
   useEffect(() => {
     if(document.cookie.includes('_309dc5ebe07576b1cbaf9107ebde8dcfa32fdd858cfe3887a4c8cb37dfbf3242')) {
         setLoggedIn(true)
@@ -20,9 +25,11 @@ export default function App() {
       <AnimatePresence>
         <Header />
         <div style={{ marginBottom: 90 }}></div>
-        <Routes>
+        <Routes location={location} key={location.pathname}>
           <Route path='/' element={<Home />} />
           <Route path='/settings' element={<Settings />} />
+          <Route path='/onesubaru' element={<OneSubaru />} />
+          <Route path='/onesubaru/recaps' element={<RecapOneSubaru />} />
         </Routes>
       </AnimatePresence>
     )

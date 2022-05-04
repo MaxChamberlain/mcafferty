@@ -2,50 +2,15 @@ import SubHeader from './SubHeader'
 import Row from './Row'
 import EditRow from './EditRow'
 import ModalHeader from "./ModalHeader";
-import { updateDailyRecap, deleteDailyRecap } from '../../../fetchData/requestDB';
+import { updateDailyRecap, deleteDailyRecap } from '../../../../../fetchData/requestDB';
+import { motion } from 'framer-motion';
+import './Modal.css'
 
-export default function Modal({ data, editing, setEditing, perms }){
-    switch(data.date){
-        case 1:
-            data.date = 'January'
-            break;
-        case 2:
-            data.date = 'February'
-            break;
-        case 3:
-            data.date = 'March'
-            break;
-        case 4:
-            data.date = 'April'
-            break;
-        case 5:
-            data.date = 'May'
-            break;
-        case 6:
-            data.date = 'June'
-            break;
-        case 7:
-            data.date = 'July'
-            break;
-        case 8:
-            data.date = 'August'
-            break;
-        case 9:
-            data.date = 'September'
-            break;
-        case 10:
-            data.date = 'October'
-            break;
-        case 11:
-            data.date = 'November'
-            break;
-        case 12:
-            data.date = 'December'
-            break;
-        default:
-            data.date = new Date(data.date).toLocaleDateString()
-            break;
+export default function Modal({ data, editing, setEditing, perms, page, selected, setSelected }){
+    if(data.date > 0 && data.date <= 12){
+        data.date = new Date(`${data.date}/1/2000`).toDateString().slice(4, 7)
     }
+    
     if(data){
         if(editing === data._id){
             return(
@@ -63,7 +28,7 @@ export default function Modal({ data, editing, setEditing, perms }){
                         position: 'absolute',
                         display: 'flex',
                         top: 7.5,
-                        right: 7.5
+                        right: 7.5,
                     }}>
                         <div style={{
                             backgroundColor: '#5aa9ff',
@@ -150,7 +115,8 @@ export default function Modal({ data, editing, setEditing, perms }){
         }else{
 
             return(
-                <div style={{
+                <div
+                style={{
                     width: '50%',
                     margin: 'auto',
                     backgroundColor: '#f8f8f8',
@@ -160,38 +126,64 @@ export default function Modal({ data, editing, setEditing, perms }){
                     border: '1px solid #cccccc',
                     marginBottom: 50
                 }}>
+                    <>
+                        {(perms.admin || perms.edit || perms.manage) &&
+                        <svg viewBox="0 0 300 300" style={{ width: 25, height: 25, position: 'absolute', top: 7.5, right: 7.5, zIndex: 9998, filter: 'invert()', cursor: 'pointer' }}
+                        onClick={() => setEditing(data._id)}>
+                            <g>
+                                <path d="M12.809,238.52L0,306.637l68.118-12.809l184.277-184.277l-55.309-55.309L12.809,238.52z M60.79,279.943l-41.992,7.896
+                                    l7.896-41.992L197.086,75.455l34.096,34.096L60.79,279.943z"/>
+                                <path d="M251.329,0l-41.507,41.507l55.308,55.308l41.507-41.507L251.329,0z M231.035,41.507l20.294-20.294l34.095,34.095
+                                    L265.13,75.602L231.035,41.507z"/>
+                            </g>
+                        </svg>}
+                        <ModalHeader>Daily Recap {data.date}</ModalHeader>
+                    {selected === data._id ? 
+                    <motion.div
+                    style={{
+                        overflow: 'hidden'
+                    }}
+                    initial={{ height: 0 }}
+                    animate={{ height: '' }}
+                    exit={{ height: 0 }}
+                    >
+                        <SubHeader columns={[['', 1], ['Units', 2], ['Gross', 2]]} />
+                        <Row columns={[['New', 1], [data.day.units.new, 2], [data.day.gross.new, 2]]} />
+                        <Row columns={[['Used', 1], [data.day.units.used, 2], [data.day.gross.used, 2]]} />
+            
+                        <SubHeader columns={[['Appraisals']]}/>
+                        <SubHeader columns={[['Acquired', 2], ['Appraised', 2], ['%', 1]]}/>
+                        <Row columns={[[data.appraisals.acquired, 2], [data.appraisals.appraised, 2], [(parseInt(data.appraisals.acquired) * 100 / parseInt(data.appraisals.appraised)).toFixed(2) + '%', 1]]} />
+            
+                        <SubHeader columns={[['', 1], ['Shown', 2], ['Scheduled', 2], ['%', 1]]} />
+                        <Row columns={[['Appointments', 1], [data.appointments.shown, 2], [data.appointments.scheduled, 2], [(parseInt(data.appointments.shown) * 100 / parseInt(data.appointments.scheduled)).toFixed(2) + '%', 1]]} />
+                        <Row columns={[['Walk Ins', 1], [data.appointments.walk_ins, 2], ['', 3]]} />
+                        <Row columns={[['Buy Backs', 1], [data.appointments.buy_backs, 2], ['', 3]]}/>
+                        <Row columns={[['TOTAL', 1], [parseInt(data.appointments.shown) + parseInt(data.appointments.buy_backs) + parseInt(data.appointments.walk_ins), 2], ['', 2], ['', 1]]} />
+                        
+                        <SubHeader columns={[['PH. Pops', 1]]} />
+                        <Row columns={[['New', 1], [data.phone_pops.new, 2]]} />
+                        <Row columns={[['Used', 1], [data.phone_pops.used, 2]]} />
+                        <Row columns={[['TOTAL', 1], [parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used), 2]]} />
+                    </motion.div>
+                        :
+                    null}
 
-                    {(perms.admin || perms.edit || perms.manage) &&
-                    <svg viewBox="0 0 300 300" style={{ width: 25, height: 25, position: 'absolute', top: 7.5, right: 7.5, zIndex: 9998, filter: 'invert()', cursor: 'pointer' }}
-                    onClick={() => setEditing(data._id)}>
-                        <g>
-                            <path d="M12.809,238.52L0,306.637l68.118-12.809l184.277-184.277l-55.309-55.309L12.809,238.52z M60.79,279.943l-41.992,7.896
-                                l7.896-41.992L197.086,75.455l34.096,34.096L60.79,279.943z"/>
-                            <path d="M251.329,0l-41.507,41.507l55.308,55.308l41.507-41.507L251.329,0z M231.035,41.507l20.294-20.294l34.095,34.095
-                                L265.13,75.602L231.035,41.507z"/>
-                        </g>
-                    </svg>}
-
-                    <ModalHeader>Daily Recap {data.date}</ModalHeader>
-        
-                    <SubHeader columns={[['', 1], ['Units', 2], ['Gross', 2]]} />
-                    <Row columns={[['New', 1], [data.day.units.new, 2], [data.day.gross.new, 2]]} />
-                    <Row columns={[['Used', 1], [data.day.units.used, 2], [data.day.gross.used, 2]]} />
-        
-                    <SubHeader columns={[['Appraisals']]}/>
-                    <SubHeader columns={[['Acquired', 2], ['Appraised', 2], ['%', 1]]}/>
-                    <Row columns={[[data.appraisals.acquired, 2], [data.appraisals.appraised, 2], [(parseInt(data.appraisals.acquired) * 100 / parseInt(data.appraisals.appraised)).toFixed(2) + '%', 1]]} />
-        
-                    <SubHeader columns={[['', 1], ['Shown', 2], ['Scheduled', 2], ['%', 1]]} />
-                    <Row columns={[['Appointments', 1], [data.appointments.shown, 2], [data.appointments.scheduled, 2], [(parseInt(data.appointments.shown) * 100 / parseInt(data.appointments.scheduled)).toFixed(2) + '%', 1]]} />
-                    <Row columns={[['Walk Ins', 1], [data.appointments.walk_ins, 2], ['', 3]]} />
-                    <Row columns={[['Buy Backs', 1], [data.appointments.buy_backs, 2], ['', 3]]}/>
-                    <Row columns={[['TOTAL', 1], [parseInt(data.appointments.shown) + parseInt(data.appointments.buy_backs) + parseInt(data.appointments.walk_ins), 2], ['', 2], ['', 1]]} />
-                    
-                    <SubHeader columns={[['PH. Pops', 1]]} />
-                    <Row columns={[['New', 1], [data.phone_pops.new, 2]]} />
-                    <Row columns={[['Used', 1], [data.phone_pops.used, 2]]} />
-                    <Row columns={[['TOTAL', 1], [parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used), 2]]} />
+                        {page === 'day' &&
+                        <ModalHeader>
+                            {selected === data._id ?
+                            <svg onClick={() => setSelected(null)} width="30" height="30" viewBox="0 0 192 192" fill="none">
+                                <rect index={data._id + '-arrow-1'} x="97" y="47" width="92" height="13" rx="6.5" transform="rotate(31.3991 26.7729 67)" fill="white"/>
+                                <rect index={data._id + '-arrow-2'} x="16.7729" y="94.933" width="92" height="13" rx="6.5" transform="rotate(-31.4 87 114.933)" fill="white"/>
+                            </svg>
+                            :
+                            <svg onClick={() => setSelected(data._id)} width="30" height="30" viewBox="0 0 192 192" fill="none">
+                                <rect index={data._id + '-arrow-1'} x="26.7729" y="67" width="92" height="13" rx="6.5" transform="rotate(31.3991 26.7729 67)" fill="white"/>
+                                <rect index={data._id + '-arrow-2'} x="87" y="114.933" width="92" height="13" rx="6.5" transform="rotate(-31.4 87 114.933)" fill="white"/>
+                            </svg>
+                            }
+                        </ModalHeader>}
+                    </>
                 </div>
             )
         }
