@@ -92,6 +92,7 @@ export default function NewModal({ setAdding }){
 
     async function importDocument({ date, units_new, units_used, gross_new, gross_used, appraisals_acquired, appraisals_appraised, appointments_shown, appointments_scheduled, appointments_walk_ins, appointments_buy_backs, phone_pops_new, phone_pops_used }){
         await newDailyRecap({
+            location: 'one_subaru',
             date: date,
             day:{
               units: {

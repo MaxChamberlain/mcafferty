@@ -1,12 +1,15 @@
 const axios = require("axios");
 const CryptoJS = require("crypto-js");
 
-export const getData = async (method, table, filter, criteria) => {
+export const getData = async (method, table, filter, criteria, location) => {
 
   let query = {
     "collection": table,
     "database": "mcafferty",
-    "dataSource": "Cluster0"
+    "dataSource": "Cluster0",
+    filter: {
+      location: location
+    }
   }
   
   let config = {
@@ -106,11 +109,14 @@ export const deleteDailyRecap = async (id) => {
 
 
 
-export const getDailyRecaps = async (doc) => {
+export const getDailyRecaps = async (location) => {
   let query = {
     "collection": 'daily_recap_reports',
     "database": "mcafferty",
-    "dataSource": "Cluster0"
+    "dataSource": "Cluster0",
+    filter: {
+      location: location
+    }
   }
   
   let config = {

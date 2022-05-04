@@ -178,7 +178,7 @@ export default function RecapOneSubaru(){
     async function getPost(){
         try{
             setLoading(1)
-            let data = await getDailyRecaps()
+            let data = await getDailyRecaps('one_subaru')
             setPost(data)
             setLoading(2)
             setTimeout(() => {
