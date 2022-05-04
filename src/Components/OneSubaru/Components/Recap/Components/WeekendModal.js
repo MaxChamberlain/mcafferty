@@ -41,28 +41,18 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                         onClick={() => {
                             importDocument(data,
                                 {
-                                    units_new: document.getElementById('daily-units-new').value ,
-                                    units_used: document.getElementById('daily-units-used').value ,
-                                    gross_new: document.getElementById('daily-gross-new').value ,
-                                    gross_used: document.getElementById('daily-gross-used').value ,
-                                    appraisals_acquired: document.getElementById('appraisals-acquired').value ,
-                                    appraisals_appraised: document.getElementById('appraisals-appraised').value ,
-                                    appointments_shown: document.getElementById('appointments-shown').value ,
-                                    appointments_scheduled: document.getElementById('appointments-scheduled').value ,
-                                    appointments_walk_ins: document.getElementById('appointments-walk_ins').value ,
-                                    appointments_buy_backs: document.getElementById('appointments-buy_backs').value ,
-                                    phone_pops_new: document.getElementById('ph-pops-new').value ,
-                                    phone_pops_used: document.getElementById('ph-pops-used').value ,
-                                    sources_referral: document.getElementById('sources-referral').value,
-                                    sources_email: document.getElementById('sources-email').value,
-                                    sources_phone: document.getElementById('sources-phone').value,
-                                    sources_walk_in: document.getElementById('sources-walk_in').value,
-                                    sources_service: document.getElementById('sources-service').value,
-                                    sources_house: document.getElementById('sources-house').value,
-                                    sources_repeat: document.getElementById('sources-repeat').value,
-                                    finance: document.getElementById('finance').value,
-                                    vsa: document.getElementById('vsa').value,
-                                    gap: document.getElementById('gap').value,
+                                    units_new: document.getElementById('daily-units-new').value ?? null,
+                                    units_used: document.getElementById('daily-units-used').value ?? null,
+                                    gross_new: document.getElementById('daily-gross-new').value ?? null,
+                                    gross_used: document.getElementById('daily-gross-used').value ?? null,
+                                    appraisals_acquired: document.getElementById('appraisals-acquired').value ?? null,
+                                    appraisals_appraised: document.getElementById('appraisals-appraised').value ?? null,
+                                    appointments_shown: document.getElementById('appointments-shown').value ?? null,
+                                    appointments_scheduled: document.getElementById('appointments-scheduled').value ?? null,
+                                    appointments_walk_ins: document.getElementById('appointments-walk_ins').value ?? null,
+                                    appointments_buy_backs: document.getElementById('appointments-buy_backs').value ?? null,
+                                    phone_pops_new: document.getElementById('ph-pops-new').value ?? null,
+                                    phone_pops_used: document.getElementById('ph-pops-used').value ?? null,
                                 }
                             )
                             setEditing(null)
@@ -120,19 +110,6 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                     <EditRow columns={[['New', 1], [parseInt(data.phone_pops.new), 2, 'ph-pops-new']]} />
                     <EditRow columns={[['Used', 1], [parseInt(data.phone_pops.used), 2, 'ph-pops-used']]} />
                     <EditRow columns={[['TOTAL', 1], [data.phone_pops.new + data.phone_pops.used, 2]]} />
-
-                    <SubHeader columns={[['Sources', 1]]} />
-                    <EditRow columns={[['Referral', 1], [parseInt(data.sources.referral), 2, 'sources-referral']]} />
-                    <EditRow columns={[['Email', 1], [parseInt(data.sources.email), 2, 'sources-email']]} />
-                    <EditRow columns={[['Phone', 1], [parseInt(data.sources.phone), 2, 'sources-phone']]} />
-                    <EditRow columns={[['Walk In', 1], [parseInt(data.sources.walk_in), 2, 'sources-walk_in']]} />
-                    <EditRow columns={[['Service', 1], [parseInt(data.sources.service), 2, 'sources-service']]} />
-                    <EditRow columns={[['House', 1], [parseInt(data.sources.house), 2, 'sources-house']]} />
-                    <EditRow columns={[['Repeat', 1], [parseInt(data.sources.repeat), 2, 'sources-repeat']]} />
-                    <EditRow columns={[['Total', 1], [String(Object.values(data.sources).reduce((total, currentValue) => total = total + parseInt(currentValue),0)), 2]]} />
-
-                    <SubHeader columns={[['Finance', 1],['VSA', 1],['GAP', 1],['Closing %', 1]]} />
-                    <EditRow columns={[[parseInt(data.finance), 1, 'finance'],[parseInt(data.vsa), 1, 'vsa'],[parseInt(data.gap), 1, 'gap'],[(((parseInt(data.day.units.new) + parseInt(data.day.units.used)) / (parseInt(data.appointments.walk_ins) + parseInt(data.appointments.buy_backs) + parseInt(data.appointments.shown) + parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used))) * 100).toFixed(2) + '%', 1]]} />
                 </div>
             )
         }else{
@@ -150,7 +127,7 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                     marginBottom: 50
                 }}>
                     <>
-                        {(perms.admin || perms.edit) && page === 'daily' &&
+                        {(perms.admin || perms.edit || perms.manage) &&
                         <svg viewBox="0 0 300 300" style={{ width: 25, height: 25, position: 'absolute', top: 7.5, right: 7.5, zIndex: 9998, filter: 'invert()', cursor: 'pointer' }}
                         onClick={() => setEditing(data._id)}>
                             <g>
@@ -189,18 +166,7 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                         <Row columns={[['Used', 1], [data.phone_pops.used, 2]]} />
                         <Row columns={[['TOTAL', 1], [parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used), 2]]} />
 
-                        <SubHeader columns={[['Sources', 1]]} />
-                        <Row columns={[['Referral', 1], [data.sources.referral, 2]]} />
-                        <Row columns={[['Email', 1], [data.sources.email, 2]]} />
-                        <Row columns={[['Phone', 1], [data.sources.phone, 2]]} />
-                        <Row columns={[['Walk In', 1], [data.sources.walk_in, 2]]} />
-                        <Row columns={[['Service', 1], [data.sources.service, 2]]} />
-                        <Row columns={[['House', 1], [data.sources.house, 2]]} />
-                        <Row columns={[['Repeat', 1], [data.sources.repeat, 2]]} />
-                        <Row columns={[['Total', 1], [Object.values(data.sources).reduce((total, currentValue) => total = total + parseInt(currentValue),0), 2]]} />
-
-                        <SubHeader columns={[['Finance', 1],['VSA', 1],['GAP', 1],['Closing %', 1]]} />
-                        <Row columns={[[data.finance, 1],[data.vsa, 1],[data.gap, 1],[(((parseInt(data.day.units.new) + parseInt(data.day.units.used)) / (parseInt(data.appointments.walk_ins) + parseInt(data.appointments.buy_backs) + parseInt(data.appointments.shown) + parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used))) * 100).toFixed(2) + '%', 1]]} />
+                        <SubHeader columns={[['Fri', 1], ['Sat', 1], ['Sun', 1]]} />
 
                     </motion.div>
                         :
@@ -226,29 +192,7 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
         }
     }
 
-    async function importDocument(data, { date, 
-                                        units_new, 
-                                        units_used, 
-                                        gross_new, 
-                                        gross_used, 
-                                        appraisals_acquired, 
-                                        appraisals_appraised, 
-                                        appointments_shown, 
-                                        appointments_scheduled, 
-                                        appointments_walk_ins, 
-                                        appointments_buy_backs, 
-                                        phone_pops_new, 
-                                        phone_pops_used, 
-                                        sources_referral,
-                                        sources_email,
-                                        sources_phone,
-                                        sources_walk_in,
-                                        sources_service,
-                                        sources_house,
-                                        sources_repeat,
-                                        finance,
-                                        vsa,
-                                        gap }){
+    async function importDocument(data, { units_new, units_used, gross_new, gross_used, appraisals_acquired, appraisals_appraised, appointments_shown, appointments_scheduled, appointments_walk_ins, appointments_buy_backs, phone_pops_new, phone_pops_used }){
         await updateDailyRecap(data._id, {
             day:{
               units: {
@@ -273,19 +217,7 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
             phone_pops: {
               new: phone_pops_new ? phone_pops_new : data.phone_pops.new,
               used: phone_pops_used ? phone_pops_used : data.phone_pops.used
-            },
-            sources: {
-                referral: sources_referral ? sources_referral : data.sources.referral,
-                email: sources_email ? sources_email : data.sources.email,
-                phone: sources_phone ? sources_phone : data.sources.phone,
-                walk_in: sources_walk_in ? sources_walk_in : data.sources.walk_in,
-                service: sources_service ? sources_service : data.sources.service,
-                house: sources_house ? sources_house : data.sources.house,
-                repeat: sources_repeat ? sources_repeat : data.sources.repeat
-            },
-            finance: finance ? finance : data.finance,
-            vsa: vsa ? vsa : data.vsa,
-            gap: gap ? gap : data.gap
+            }
           });
           window.location.reload()
     }

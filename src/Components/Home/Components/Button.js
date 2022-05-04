@@ -5,8 +5,6 @@ export default function Button({children, page}){
         <NavLink to={`/${page}`} style={{
             width: '20%',
             height: 150,
-            backgroundColor: '#ddd',
-            border: '1px solid #ccc',
             borderRadius: 5,
             fontSize: 30,
             fontWeight: 'bold',

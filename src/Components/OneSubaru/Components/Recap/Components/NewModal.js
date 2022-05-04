@@ -31,6 +31,7 @@ export default function NewModal({ setAdding }){
                     marginRight: 5
                 }}
                 onClick={() => {
+                    console.log(document.getElementById('sources-referral').value)
                     importDocument(
                         {
                             date: document.getElementById('new-modal-date').value,
@@ -47,6 +48,16 @@ export default function NewModal({ setAdding }){
                             appointments_buy_backs: document.getElementById('appointments-buy_backs').value,
                             phone_pops_new: document.getElementById('ph-pops-new').value,
                             phone_pops_used: document.getElementById('ph-pops-used').value,
+                            sources_referral: document.getElementById('sources-referral').value,
+                            sources_email: document.getElementById('sources-email').value,
+                            sources_phone: document.getElementById('sources-phone').value,
+                            sources_walk_in: document.getElementById('sources-walk_in').value,
+                            sources_service: document.getElementById('sources-service').value,
+                            sources_house: document.getElementById('sources-house').value,
+                            sources_repeat: document.getElementById('sources-repeat').value,
+                            finance: document.getElementById('finance').value,
+                            vsa: document.getElementById('vsa').value,
+                            gap: document.getElementById('gap').value,
                         }
                     )
                     setAdding(false)
@@ -87,10 +98,47 @@ export default function NewModal({ setAdding }){
             <EditRow columns={[['New', 1], [, 2, 'ph-pops-new']]} />
             <EditRow columns={[['Used', 1], [, 2, 'ph-pops-used']]} />
             <Row columns={[['TOTAL', 1], ['', 2]]} />
+
+            <SubHeader columns={[['Sources', 1]]} />
+            <EditRow columns={[['Referral', 1], [, 1, 'sources-referral']]} />
+            <EditRow columns={[['Email', 1], [, 1, 'sources-email']]} />
+            <EditRow columns={[['Phone', 1], [, 1, 'sources-phone']]} />
+            <EditRow columns={[['Walk In', 1], [, 1, 'sources-walk_in']]} />
+            <EditRow columns={[['Service', 1], [, 1, 'sources-service']]} />
+            <EditRow columns={[['House', 1], [, 1, 'sources-house']]} />
+            <EditRow columns={[['Repeat', 1], [, 1, 'sources-repeat']]} />
+            <EditRow columns={[['Total', 1], ['', 2]]} />
+
+            <SubHeader columns={[['Finance', 1],['VSA', 1],['GAP', 1],['Closing %', 1]]} />
+            <EditRow columns={[[, 1, 'finance'],[, 1, 'vsa'],[, 1, 'gap'],['%', 1]]} />
+
         </div>
     )
 
-    async function importDocument({ date, units_new, units_used, gross_new, gross_used, appraisals_acquired, appraisals_appraised, appointments_shown, appointments_scheduled, appointments_walk_ins, appointments_buy_backs, phone_pops_new, phone_pops_used }){
+    async function importDocument({ date, 
+                                    units_new, 
+                                    units_used, 
+                                    gross_new, 
+                                    gross_used, 
+                                    appraisals_acquired, 
+                                    appraisals_appraised, 
+                                    appointments_shown, 
+                                    appointments_scheduled, 
+                                    appointments_walk_ins, 
+                                    appointments_buy_backs, 
+                                    phone_pops_new, 
+                                    phone_pops_used, 
+                                    sources_referral,
+                                    sources_email,
+                                    sources_phone,
+                                    sources_walk_in,
+                                    sources_service,
+                                    sources_house,
+                                    sources_repeat,
+                                    finance,
+                                    vsa,
+                                    gap }){
+        console.log(sources_referral)
         await newDailyRecap({
             location: 'one_subaru',
             date: date,
@@ -117,7 +165,19 @@ export default function NewModal({ setAdding }){
             phone_pops: {
               new: phone_pops_new,
               used: phone_pops_used
-            }
+            },
+            sources: {
+                referral: sources_referral,
+                email: sources_email,
+                phone: sources_phone,
+                walk_in: sources_walk_in,
+                service: sources_service,
+                house: sources_house,
+                repeat: sources_repeat
+            },
+            finance: finance,
+            vsa: vsa,
+            gap: gap
           });
           window.location.reload()
     }

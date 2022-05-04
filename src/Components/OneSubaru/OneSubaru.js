@@ -20,24 +20,6 @@ export default function OneSubaru(){
                 <Button page='onesubaru/recaps'>
                     Recaps
                 </Button>
-                <Button page='onesubaru'>
-                    Trip Pads
-                </Button>
-                <Button page='onesubaru'>
-                    GSM Binder
-                </Button>
-                <Button page='onesubaru'>
-                    F&I Menu
-                </Button>
-                <Button page='onesubaru/recaps'>
-                    Product Knowledge Resources
-                </Button>
-                <Button page='onesubaru'>
-                    Used Car Training Materials
-                </Button>
-                <Button page='onesubaru'>
-                    Open Floor
-                </Button>
             </motion.div>
         </div>
     )
