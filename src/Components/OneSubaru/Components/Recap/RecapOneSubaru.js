@@ -18,6 +18,8 @@ export default function RecapOneSubaru(){
     const [ month, setMonth ] = useState(new Date().getMonth() + 1)
     const [ year, setYear ] = useState(new Date().getFullYear())
     const [ monthlyReduced, setMonthlyReduced ] = useState()
+    const [ pace, setPace ] = useState(null)
+    const [ workingDays, setWorkingDays ] = useState(new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate())
 
     useEffect(() => {
         getPerms()
@@ -29,6 +31,7 @@ export default function RecapOneSubaru(){
         const loadMonthly = async () => {
             setMonthlyReduced({
                 _id: '5e9f9f9f9f9f9f9f9f9f9f9',
+                count: 0,
                 date: month + '/' + year,
                 day:{
                     units: {
@@ -96,8 +99,8 @@ export default function RecapOneSubaru(){
                         newObj.finance +=  parseInt(curr.finance)
                         newObj.vsa +=  parseInt(curr.vsa)
                         newObj.gap +=  parseInt(curr.gap)
+                        newObj.count++
 
-                        console.log(newObj)
                         return newObj
                     })
                 } 
@@ -105,10 +108,93 @@ export default function RecapOneSubaru(){
             setLoading(0)
         }
 
-        if(page === 'month'){
-            loadMonthly()
+        const loadPace = async () => {
+            setPace({
+                _id: '5e8f8f8f8f8f8f8f8f8f8f8',
+                date: month + '/' + year,
+                day:{
+                    units: {
+                        new: 0,
+                        used: 0
+                    },
+                    gross: {
+                        new: 0,
+                        used: 0
+                    }
+                },
+                appraisals: {
+                    acquired: 0,
+                    appraised: 0
+                },
+                appointments: {
+                    shown: 0,
+                    scheduled: 0,
+                    walk_ins: 0,
+                    buy_backs: 0
+                },
+                phone_pops: {
+                    new: 0,
+                    used: 0
+                },
+                sources: {
+                    referral: 0,
+                    email: 0,
+                    phone: 0,
+                    walk_in: 0,
+                    service: 0,
+                    house: 0,
+                    repeat: 0
+                },
+                finance: 0,
+                vsa: 0,
+                gap: 0
+            })
+
+            setLoading(1)
+            await post.forEach(curr => {
+                if(new Date(curr.date).getMonth() + 1 === month && new Date(curr.date).getFullYear() === year){
+                    monthlyReduced && setPace(prevState => {
+                        let newObj = Object.assign(prevState)
+
+
+                        newObj.day.units.new = (monthlyReduced.day.units.new / monthlyReduced.count) * workingDays
+                        newObj.day.units.used = (monthlyReduced.day.units.used / monthlyReduced.count) * workingDays
+                        newObj.day.gross.new = (monthlyReduced.day.gross.new / monthlyReduced.count) * workingDays
+                        newObj.day.gross.used = (monthlyReduced.day.gross.used / monthlyReduced.count) * workingDays
+                        newObj.appraisals.acquired = (monthlyReduced.appraisals.acquired / monthlyReduced.count) * workingDays
+                        newObj.appraisals.appraised = (monthlyReduced.appraisals.appraised / monthlyReduced.count) * workingDays
+                        newObj.appointments.shown = (monthlyReduced.appointments.shown / monthlyReduced.count) * workingDays
+                        newObj.appointments.scheduled = (monthlyReduced.appointments.scheduled / monthlyReduced.count) * workingDays
+                        newObj.appointments.walk_ins = (monthlyReduced.appointments.walk_ins / monthlyReduced.count) * workingDays
+                        newObj.appointments.buy_backs = (monthlyReduced.appointments.buy_backs / monthlyReduced.count) * workingDays
+                        newObj.phone_pops.new = (monthlyReduced.phone_pops.new / monthlyReduced.count) * workingDays
+                        newObj.phone_pops.used = (monthlyReduced.phone_pops.used / monthlyReduced.count) * workingDays
+                        newObj.sources.referral = (monthlyReduced.sources.referral / monthlyReduced.count) * workingDays
+                        newObj.sources.email = (monthlyReduced.sources.email / monthlyReduced.count) * workingDays
+                        newObj.sources.phone = (monthlyReduced.sources.phone / monthlyReduced.count) * workingDays
+                        newObj.sources.walk_in = (monthlyReduced.sources.walk_in / monthlyReduced.count) * workingDays
+                        newObj.sources.service = (monthlyReduced.sources.service / monthlyReduced.count) * workingDays
+                        newObj.sources.house = (monthlyReduced.sources.house / monthlyReduced.count) * workingDays
+                        newObj.sources.repeat = (monthlyReduced.sources.repeat / monthlyReduced.count) * workingDays
+                        newObj.finance = (monthlyReduced.finance / monthlyReduced.count) * workingDays
+                        newObj.vsa = (monthlyReduced.vsa / monthlyReduced.count) * workingDays
+                        newObj.gap = (monthlyReduced.gap / monthlyReduced.count) * workingDays
+                        return newObj
+                    })
+                } 
+            })
+            setLoading(0)
         }
-    }, [page, month, year])
+        const run = async () => {
+            if(page === 'month'){
+                loadMonthly()
+            }else if(page === 'pace'){
+                await loadMonthly(false)
+                loadPace()
+            }
+        }
+        run()
+    }, [page, month, year, workingDays])
     return(
         <>
             {loading === 1 && <Loading />}
@@ -135,7 +221,7 @@ export default function RecapOneSubaru(){
                             letterSpacing: page === e[1] ? '1px' : '0px',
                             color: page === e[1] ? 'black' : '#999'
                         }}
-                        onClick={() => setPage(e[1])}
+                        onClick={e[1] !== 'pace' ? () => {setPage(e[1])} : () => {setPage('month'); setTimeout(() => setPage('pace'), 1)}}
                         >
                             {e[0]}
                         </div>
@@ -152,7 +238,7 @@ export default function RecapOneSubaru(){
                 top: 80,
                 left: 10,
                 right: 10,
-                height: window.innerHeight - 160,
+                height: page === 'month' ? window.innerHeight - 160 : window.innerHeight - 80,
                 overflow: 'scroll'
             }}>
                 {perms && <div style={{
@@ -166,12 +252,33 @@ export default function RecapOneSubaru(){
                             <WeekendModal selected={selected} setSelected={setSelected} data={e} page={page} perms={perms} setEditing={setEditing} editing={editing} />
                     })
                     :
-                    monthlyReduced && loading === 0 && 
+                    page === 'month' ? monthlyReduced && loading === 0 && 
                         <Modal selected='5e9f9f9f9f9f9f9f9f9f9f9' data={monthlyReduced} perms={perms} setEditing={setEditing} editing={editing} />
+                        :
+                        pace && <Modal selected='5e8f8f8f8f8f8f8f8f8f8f8' data={pace} perms={perms} setEditing={setEditing} editing={editing} workDaysComponent={
+                            <div style={{
+                                position: 'absolute',
+                                top: 60,
+                                left: 10,
+                                height: 50,
+                                width: 250,
+                                border: '1px solid black',
+                            }}>
+                                <input style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    fontSize: 30,
+                                }}
+                                type='number'
+                                onChange={(e) => setWorkingDays(e.target.value)}
+                                onBlur={e => e.target.value = ''}
+                                placeholder={workingDays + ' working days'}/>
+                            </div>
+                        } />
                     )}
                 </div>}
             </motion.div>
-            {monthlyReduced && loading === 0 && page === 'month' && 
+            {(monthlyReduced && loading === 0) && page === 'month' && 
                 <>
                     <div style={{
                         display: 'flex',
@@ -183,10 +290,9 @@ export default function RecapOneSubaru(){
                         bottom: 0,
                         left: 0,
                         right: 0,
-                        zIndex: 9999
+                        zIndex: 8999
                     }}>
                         {[...new Set(post.map(item => new Date(item.date).getFullYear()))].map(e => {
-                            console.log(e)
                             return <span style={{
                                 color: year === e ? 'black' : '#999',
                                 cursor: 'pointer',
