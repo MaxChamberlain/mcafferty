@@ -6,7 +6,9 @@ import ModalHeader from "./ModalHeader";
 
 export default function NewModal({ setAdding }){
     return(
-        <div style={{
+        <div 
+        id='recap-modal'
+        style={{
             width: '50%',
             margin: 'auto',
             backgroundColor: '#f8f8f8',

@@ -14,3 +14,23 @@
   .slide-in-exit-active {
     left: 100%;
   }
+
+  @media (pointer: coarse), (pointer: none), (max-width: 1080px){
+    #recap-modal{
+      width: 90% !important;
+    }
+    #work-days-component{
+      display: block !important;
+      position: relative !important;
+      width: 80% !important;
+      margin-bottom: 80px;
+      margin-top: -50px;
+      margin-left: 6.5%;
+      height: 50px !important;
+      border: none !important;
+    }
+    #work-days-component input{
+      width: 90% !important;
+      height: 35px !important;
+    }
+  }

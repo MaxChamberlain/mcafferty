@@ -256,7 +256,9 @@ export default function RecapOneSubaru(){
                         <Modal selected='5e9f9f9f9f9f9f9f9f9f9f9' data={monthlyReduced} perms={perms} setEditing={setEditing} editing={editing} />
                         :
                         pace && <Modal selected='5e8f8f8f8f8f8f8f8f8f8f8' data={pace} perms={perms} setEditing={setEditing} editing={editing} workDaysComponent={
-                            <div style={{
+                            <div 
+                            id='work-days-component'
+                            style={{
                                 position: 'absolute',
                                 top: 60,
                                 left: 10,

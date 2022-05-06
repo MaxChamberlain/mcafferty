@@ -14,7 +14,9 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
     if(data){
         if(editing === data._id){
             return(
-                <div style={{
+                <div 
+                id='recap-modal'
+                style={{
                     width: '50%',
                     margin: 'auto',
                     backgroundColor: '#f8f8f8',
@@ -141,6 +143,7 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                 <>
                     {workDaysComponent}
                     <div
+                    id='recap-modal'
                     style={{
                         width: '50%',
                         margin: 'auto',
