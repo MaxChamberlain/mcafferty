@@ -5,18 +5,18 @@ export default function Button({children, page}){
         <NavLink to={`/${page}`} 
             style={{
             width: '33vw',
-            height: 'calc(100vh - 100px)',
-            marginTop: '60px',
+            height: 'calc(100vh - 150px)',
             borderRadius: 5,
             fontSize: 30,
             fontWeight: 'bold',
             textAlign: 'center',
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center',
-            color: 'white',
+            color: 'black',
             textDecoration: 'none',
             position: 'relative',
+            backgroundColor: '#f8f8f8',
+            marginTop: 50
         }}>
             {children}
         </NavLink>
