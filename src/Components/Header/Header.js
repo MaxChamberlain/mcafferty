@@ -14,7 +14,8 @@ export default function Header(){
         }}>
             <NavLink to='/settings'>
 
-            <svg version="1.1" id="Capa_1" x="0px" y="0px"
+            <svg 
+                version="1.1" x="0px" y="0px"
                 viewBox="0 0 478.703 478.703" 
                 style={{
                     height: 25,
@@ -53,7 +54,9 @@ export default function Header(){
                 </svg>
             </NavLink>
 
-            <div style={{
+            <div 
+                id='title-svg'
+                style={{
                 width: '100vw',
                 display: 'flex',
                 justifyContent: 'center',
@@ -62,7 +65,7 @@ export default function Header(){
             </div>
 
             <NavLink to='/'>
-                <svg version="1.1" id="Capa_1" x="0px" y="0px"
+                <svg version="1.1"  x="0px" y="0px"
                     width="495.398px" height="495.398px" viewBox="0 0 495.398 495.398" style={{
                         height: 30,
                         width: 30,

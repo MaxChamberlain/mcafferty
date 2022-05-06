@@ -8,6 +8,7 @@ import Settings from './Components/Settings/Settings'
 import OneSubaru from './Components/OneSubaru/OneSubaru'
 import RecapOneSubaru from './Components/OneSubaru/Components/Recap/RecapOneSubaru'
 import {useLocation} from "react-router-dom";
+import './App.css'
 
 export default function App() {
   const [ loggedIn, setLoggedIn ] = useState(false)
