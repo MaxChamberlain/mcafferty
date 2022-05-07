@@ -5,7 +5,7 @@ export default function Row({ columns }){
             backgroundColor: '#eee',
             color: 'black',
             fontWeight: 'bold',
-            fontSize: 20,
+            fontSize: 16,
             padding: '10px 0',
             textAlign: 'center',
             display: 'flex',

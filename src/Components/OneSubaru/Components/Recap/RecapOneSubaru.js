@@ -6,6 +6,7 @@ import WeekendModal from './Components/WeekendModal'
 import NewModal from './Components/NewModal'
 import { getUser, getDailyRecaps } from "../../../../fetchData/requestDB";
 import {Loading, Failed, Success} from '../../../Loading'
+import { CSVLink } from "react-csv";
 
 export default function RecapOneSubaru(){
     const [ perms, setPerms ] = useState(null)

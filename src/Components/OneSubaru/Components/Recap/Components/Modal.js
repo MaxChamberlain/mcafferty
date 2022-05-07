@@ -5,11 +5,12 @@ import ModalHeader from "./ModalHeader";
 import { updateDailyRecap, deleteDailyRecap } from '../../../../../fetchData/requestDB';
 import { motion } from 'framer-motion';
 import './Modal.css'
+import { CSVLink } from 'react-csv';
 
 export default function Modal({ data, editing, setEditing, perms, page, selected, setSelected, workDaysComponent }){
     if(data.date > 0 && data.date <= 12){
         data.date = new Date(`${data.date}/1/2000`).toDateString().slice(4, 7)
-    }
+    }   
     
     if(data){
         if(editing === data._id){
@@ -29,7 +30,7 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                     <div style={{
                         position: 'absolute',
                         display: 'flex',
-                        top: 7.5,
+                        top: 47.5,
                         right: 7.5,
                     }}>
                         <div style={{
@@ -86,6 +87,7 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                     </div>
                     
                     {(perms.admin || perms.delete) && 
+                    <>
                     <div style={{
                         backgroundColor: '#ff4242',
                         color: 'white',
@@ -93,14 +95,15 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                         borderRadius: 5,
                         cursor: 'pointer',
                         position: 'absolute',
-                        top: 10,
-                        left: 20
+                        top: 46,
+                        left: 10,
                     }}
                     onClick={() => {
                         deleteDoc(data._id)
                     }}>
                         Delete
-                    </div>}
+                    </div>
+                    </>}
 
                     <ModalHeader>Daily Recap {data.date}</ModalHeader>
 
@@ -155,8 +158,8 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                         marginBottom: 50
                     }}>
                         <>
-                            {(perms.admin || perms.edit) && page === 'daily' &&
-                            <svg viewBox="0 0 300 300" style={{ width: 25, height: 25, position: 'absolute', top: 7.5, right: 7.5, zIndex: 9998, filter: 'invert()', cursor: 'pointer' }}
+                            {(perms.admin || perms.edit) && page === 'day' &&
+                            <svg viewBox="0 0 300 300" style={{ width: 25, height: 25, position: 'absolute', top: selected === data._id ? 47.5 : 7.5, right: 7.5, zIndex: 9998, filter: 'invert()', cursor: 'pointer' }}
                             onClick={() => setEditing(data._id)}>
                                 <g>
                                     <path d="M12.809,238.52L0,306.637l68.118-12.809l184.277-184.277l-55.309-55.309L12.809,238.52z M60.79,279.943l-41.992,7.896
@@ -165,49 +168,65 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                                         L265.13,75.602L231.035,41.507z"/>
                                 </g>
                             </svg>}
+                            {selected === data._id && 
+                            <motion.div style={{
+                                width: '100%',
+                                height: 40,
+                                fontWeight: 'bold',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                            }}
+                            whileHover={{ backgroundColor: '#ccc' }}>
+                                <CSVLink {...exportAsCsv(data)} style={{ marginTop: 10, color: 'black', textDecoration: 'none' }}>Export as CSV</CSVLink>
+                            </motion.div>}
+
                             <ModalHeader>Daily Recap {data.date}</ModalHeader>
                         {selected === data._id ? 
-                        <motion.div
-                        style={{
-                            overflow: 'hidden'
-                        }}
-                        initial={{ height: 0 }}
-                        animate={{ height: '' }}
-                        exit={{ height: 0 }}
-                        >
-                            <SubHeader columns={[['', 1], ['Units', 2], ['Gross', 2]]} />
-                            <Row columns={[['New', 1], [data.day.units.new, 2], [data.day.gross.new, 2]]} />
-                            <Row columns={[['Used', 1], [data.day.units.used, 2], [data.day.gross.used, 2]]} />
-                
-                            <SubHeader columns={[['Appraisals']]}/>
-                            <SubHeader columns={[['Acquired', 2], ['Appraised', 2], ['%', 1]]}/>
-                            <Row columns={[[data.appraisals.acquired, 2], [data.appraisals.appraised, 2], [(parseInt(data.appraisals.acquired) * 100 / parseInt(data.appraisals.appraised)).toFixed(2) + '%', 1]]} />
-                
-                            <SubHeader columns={[['', 1], ['Shown', 2], ['Scheduled', 2], ['%', 1]]} />
-                            <Row columns={[['Appointments', 1], [data.appointments.shown, 2], [data.appointments.scheduled, 2], [(parseInt(data.appointments.shown) * 100 / parseInt(data.appointments.scheduled)).toFixed(2) + '%', 1]]} />
-                            <Row columns={[['Walk Ins', 1], [data.appointments.walk_ins, 2], ['', 3]]} />
-                            <Row columns={[['Buy Backs', 1], [data.appointments.buy_backs, 2], ['', 3]]}/>
-                            <Row columns={[['TOTAL', 1], [parseInt(data.appointments.shown) + parseInt(data.appointments.buy_backs) + parseInt(data.appointments.walk_ins), 2], ['', 2], ['', 1]]} />
-                            
-                            <SubHeader columns={[['PH. Pops', 1]]} />
-                            <Row columns={[['New', 1], [data.phone_pops.new, 2]]} />
-                            <Row columns={[['Used', 1], [data.phone_pops.used, 2]]} />
-                            <Row columns={[['TOTAL', 1], [parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used), 2]]} />
+                        <>
+                            <motion.div
+                            style={{
+                                overflow: 'hidden'
+                            }}
+                            initial={{ height: 0 }}
+                            animate={{ height: '' }}
+                            exit={{ height: 0 }}
+                            >
+                                
+                                <SubHeader columns={[['', 1], ['Units', 2], ['Gross', 2]]} />
+                                <Row columns={[['New', 1], [data.day.units.new, 2], [data.day.gross.new, 2]]} />
+                                <Row columns={[['Used', 1], [data.day.units.used, 2], [data.day.gross.used, 2]]} />
+                    
+                                <SubHeader columns={[['Appraisals']]}/>
+                                <SubHeader columns={[['Acquired', 2], ['Appraised', 2], ['%', 1]]}/>
+                                <Row columns={[[data.appraisals.acquired, 2], [data.appraisals.appraised, 2], [(parseInt(data.appraisals.acquired) * 100 / parseInt(data.appraisals.appraised)).toFixed(2) + '%', 1]]} />
+                    
+                                <SubHeader columns={[['', 1], ['Shown', 2], ['Scheduled', 2], ['%', 1]]} />
+                                <Row columns={[['Appointments', 1], [data.appointments.shown, 2], [data.appointments.scheduled, 2], [(parseInt(data.appointments.shown) * 100 / parseInt(data.appointments.scheduled)).toFixed(2) + '%', 1]]} />
+                                <Row columns={[['Walk Ins', 1], [data.appointments.walk_ins, 2], ['', 3]]} />
+                                <Row columns={[['Buy Backs', 1], [data.appointments.buy_backs, 2], ['', 3]]}/>
+                                <Row columns={[['TOTAL', 1], [parseInt(data.appointments.shown) + parseInt(data.appointments.buy_backs) + parseInt(data.appointments.walk_ins), 2], ['', 2], ['', 1]]} />
+                                
+                                <SubHeader columns={[['PH. Pops', 1]]} />
+                                <Row columns={[['New', 1], [data.phone_pops.new, 2]]} />
+                                <Row columns={[['Used', 1], [data.phone_pops.used, 2]]} />
+                                <Row columns={[['TOTAL', 1], [parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used), 2]]} />
 
-                            <SubHeader columns={[['Sources', 1]]} />
-                            <Row columns={[['Referral', 1], [data.sources.referral, 2]]} />
-                            <Row columns={[['Email', 1], [data.sources.email, 2]]} />
-                            <Row columns={[['Phone', 1], [data.sources.phone, 2]]} />
-                            <Row columns={[['Walk In', 1], [data.sources.walk_in, 2]]} />
-                            <Row columns={[['Service', 1], [data.sources.service, 2]]} />
-                            <Row columns={[['House', 1], [data.sources.house, 2]]} />
-                            <Row columns={[['Repeat', 1], [data.sources.repeat, 2]]} />
-                            <Row columns={[['Total', 1], [Object.values(data.sources).reduce((total, currentValue) => total = total + parseInt(currentValue),0), 2]]} />
+                                <SubHeader columns={[['Sources', 1]]} />
+                                <Row columns={[['Referral', 1], [data.sources.referral, 2]]} />
+                                <Row columns={[['Email', 1], [data.sources.email, 2]]} />
+                                <Row columns={[['Phone', 1], [data.sources.phone, 2]]} />
+                                <Row columns={[['Walk In', 1], [data.sources.walk_in, 2]]} />
+                                <Row columns={[['Service', 1], [data.sources.service, 2]]} />
+                                <Row columns={[['House', 1], [data.sources.house, 2]]} />
+                                <Row columns={[['Repeat', 1], [data.sources.repeat, 2]]} />
+                                <Row columns={[['Total', 1], [Object.values(data.sources).reduce((total, currentValue) => total = total + parseInt(currentValue),0), 2]]} />
 
-                            <SubHeader columns={[['Finance', 1],['VSA', 1],['GAP', 1],['Closing %', 1]]} />
-                            <Row columns={[[data.finance, 1],[data.vsa, 1],[data.gap, 1],[(((parseInt(data.day.units.new) + parseInt(data.day.units.used)) / (parseInt(data.appointments.walk_ins) + parseInt(data.appointments.buy_backs) + parseInt(data.appointments.shown) + parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used))) * 100).toFixed(2) + '%', 1]]} />
+                                <SubHeader columns={[['Finance', 1],['VSA', 1],['GAP', 1],['Closing %', 1]]} />
+                                <Row columns={[[data.finance, 1],[data.vsa, 1],[data.gap, 1],[(((parseInt(data.day.units.new) + parseInt(data.day.units.used)) / (parseInt(data.appointments.walk_ins) + parseInt(data.appointments.buy_backs) + parseInt(data.appointments.shown) + parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used))) * 100).toFixed(2) + '%', 1]]} />
 
-                        </motion.div>
+                            </motion.div>
+                        </>
                             :
                         null}
 
@@ -301,5 +320,48 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
             await deleteDailyRecap(id);
             window.location.reload()
         }
+    }
+
+    function exportAsCsv(data){
+
+
+        const headers = [
+            { label: "One", key: "c1" },
+            { label: "Recap", key: "c2" },
+            { label: "Report", key: "c3" },
+            { label: "", key: "c4" },
+            { label: "", key: "c5" },
+            { label: "", key: "c6" },
+        ]
+
+        const exportData = [
+            { c1: ' ' },
+            { c1: data.day.units.new, c2: data.day.gross.new, c3: 'New' },
+            { c1: data.day.units.used, c2: data.day.gross.used, c3: 'Used' },
+            { c1: ' ' },
+            { c1: ' ', c2: 'Appraisals', c3: ' ' },
+            { c1: 'Acquired', c2: 'Appraised', c3: '%' },
+            { c1: data.appraisals.acquired, c2: data.appraisals.appraised, c3: ((data.appraisals.acquired / data.appraisals.appraised) * 100).toFixed(2) + '%' },
+            { c1: ' ' },
+            { c1: ' ', c2: 'Appointments', c3: ' ' },
+            { c1: 'Shown', c2: 'Scheduled', c3: '%' },
+            { c1: data.appointments.shown, c2: data.appointments.scheduled, c3: ((data.appointments.shown / data.appointments.scheduled) * 100).toFixed(2) + '%' },
+            { c1: 'Walk Ins', c2: data.appointments.walk_ins },
+            { c1: 'Buy Backs', c2: data.appointments.buy_backs },
+            { c1: 'Total', c2: parseInt(data.appointments.buy_backs) + parseInt(data.appointments.walk_ins) + parseInt(data.appraisals.acquired) },
+            { c1: ' ' },
+            { c1: ' ', c2: 'Phone Pops', c3: ' ' },
+            { c1: 'New', c2: data.phone_pops.new },
+            { c1: 'Used', c2: data.phone_pops.used },
+            { c1: 'Total', c2: parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used) },
+        ]
+
+        const csvReport = {
+            data: exportData,
+            headers: null,
+            filename: `report-${new Date().toLocaleDateString()}.csv`
+          }
+
+        return csvReport
     }
 }

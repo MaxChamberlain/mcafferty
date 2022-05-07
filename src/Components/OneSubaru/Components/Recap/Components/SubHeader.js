@@ -5,7 +5,7 @@ export default function SubHeader({ columns }){
             backgroundColor: '#aaa',
             color: 'white',
             fontWeight: 'bold',
-            fontSize: 20,
+            fontSize: 18,
             padding: '10px 0',
             textAlign: 'center',
             display: 'flex',
