@@ -44,18 +44,18 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                         onClick={() => {
                             importDocument(data,
                                 {
-                                    units_new: document.getElementById('daily-units-new').value ,
-                                    units_used: document.getElementById('daily-units-used').value ,
-                                    gross_new: document.getElementById('daily-gross-new').value ,
-                                    gross_used: document.getElementById('daily-gross-used').value ,
-                                    appraisals_acquired: document.getElementById('appraisals-acquired').value ,
-                                    appraisals_appraised: document.getElementById('appraisals-appraised').value ,
-                                    appointments_shown: document.getElementById('appointments-shown').value ,
-                                    appointments_scheduled: document.getElementById('appointments-scheduled').value ,
-                                    appointments_walk_ins: document.getElementById('appointments-walk_ins').value ,
-                                    appointments_buy_backs: document.getElementById('appointments-buy_backs').value ,
-                                    phone_pops_new: document.getElementById('ph-pops-new').value ,
-                                    phone_pops_used: document.getElementById('ph-pops-used').value ,
+                                    units_new: document.getElementById('daily-units-new').value,
+                                    units_used: document.getElementById('daily-units-used').value,
+                                    gross_new: document.getElementById('daily-gross-new').value,
+                                    gross_used: document.getElementById('daily-gross-used').value,
+                                    appraisals_acquired: document.getElementById('appraisals-acquired').value,
+                                    appraisals_appraised: document.getElementById('appraisals-appraised').value,
+                                    appointments_shown: document.getElementById('appointments-shown').value,
+                                    appointments_scheduled: document.getElementById('appointments-scheduled').value,
+                                    appointments_walk_ins: document.getElementById('appointments-walk_ins').value,
+                                    appointments_buy_backs: document.getElementById('appointments-buy_backs').value,
+                                    phone_pops_new: document.getElementById('ph-pops-new').value,
+                                    phone_pops_used: document.getElementById('ph-pops-used').value,
                                     sources_referral: document.getElementById('sources-referral').value,
                                     sources_email: document.getElementById('sources-email').value,
                                     sources_phone: document.getElementById('sources-phone').value,
@@ -63,9 +63,13 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                                     sources_service: document.getElementById('sources-service').value,
                                     sources_house: document.getElementById('sources-house').value,
                                     sources_repeat: document.getElementById('sources-repeat').value,
+                                    sources_self: document.getElementById('sources-self_generated').value,
                                     finance: document.getElementById('finance').value,
                                     vsa: document.getElementById('vsa').value,
                                     gap: document.getElementById('gap').value,
+                                    ppw: document.getElementById('ppw').value,
+                                    t_w: document.getElementById('t_w').value,
+                                    maintanence: document.getElementById('maintanence').value,
                                 }
                             )
                             setEditing(null)
@@ -121,23 +125,33 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                     <EditRow columns={[['Buy Backs', 1], [parseInt(data.appointments.buy_backs), 2, 'appointments-buy_backs'], ['', 3]]}/>
                     <EditRow columns={[['TOTAL', 1], [data.appointments.shown + data.appointments.buy_backs + data.appointments.walk_ins, 2], ['', 2], ['', 1]]} />
 
-                    <SubHeader columns={[['PH. Pops', 1]]} />
-                    <EditRow columns={[['New', 1], [parseInt(data.phone_pops.new), 2, 'ph-pops-new']]} />
-                    <EditRow columns={[['Used', 1], [parseInt(data.phone_pops.used), 2, 'ph-pops-used']]} />
-                    <EditRow columns={[['TOTAL', 1], [data.phone_pops.new + data.phone_pops.used, 2]]} />
-
                     <SubHeader columns={[['Sources', 1]]} />
-                    <EditRow columns={[['Referral', 1], [parseInt(data.sources.referral), 2, 'sources-referral']]} />
-                    <EditRow columns={[['Email', 1], [parseInt(data.sources.email), 2, 'sources-email']]} />
-                    <EditRow columns={[['Phone', 1], [parseInt(data.sources.phone), 2, 'sources-phone']]} />
-                    <EditRow columns={[['Walk In', 1], [parseInt(data.sources.walk_in), 2, 'sources-walk_in']]} />
-                    <EditRow columns={[['Service', 1], [parseInt(data.sources.service), 2, 'sources-service']]} />
-                    <EditRow columns={[['House', 1], [parseInt(data.sources.house), 2, 'sources-house']]} />
-                    <EditRow columns={[['Repeat', 1], [parseInt(data.sources.repeat), 2, 'sources-repeat']]} />
-                    <EditRow columns={[['Total', 1], [String(Object.values(data.sources).reduce((total, currentValue) => total = total + parseInt(currentValue),0)), 2]]} />
+                    <EditRow columns={[['Referral', 1], [, 1, 'sources-referral']]} />
+                    <EditRow columns={[['Email', 1], [, 1, 'sources-email']]} />
+                    <EditRow columns={[['Phone', 1], [, 1, 'sources-phone']]} />
+                    <EditRow columns={[['Walk In', 1], [, 1, 'sources-walk_in']]} />
+                    <EditRow columns={[['Service', 1], [, 1, 'sources-service']]} />
+                    <EditRow columns={[['House', 1], [, 1, 'sources-house']]} />
+                    <EditRow columns={[['Repeat', 1], [, 1, 'sources-repeat']]} />
+                    <EditRow columns={[['Self Generated', 1], [, 1, 'sources-self_generated']]} />
+                    <EditRow columns={[['Total', 1], ['', 2]]} />
 
-                    <SubHeader columns={[['Finance', 1],['VSA', 1],['GAP', 1],['Closing %', 1]]} />
-                    <EditRow columns={[[parseInt(data.finance), 1, 'finance'],[parseInt(data.vsa), 1, 'vsa'],[parseInt(data.gap), 1, 'gap'],[(((parseInt(data.day.units.new) + parseInt(data.day.units.used)) / (parseInt(data.appointments.walk_ins) + parseInt(data.appointments.buy_backs) + parseInt(data.appointments.shown) + parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used))) * 100).toFixed(2) + '%', 1]]} />
+                    <SubHeader columns={[['PH. Pops', 1]]} />
+                    <EditRow columns={[['New', 1], [, 2, 'ph-pops-new']]} />
+                    <EditRow columns={[['Used', 1], [, 2, 'ph-pops-used']]} />
+                    <Row columns={[['TOTAL', 1], ['', 2]]} />
+
+                    <SubHeader columns={[['Finance', 1],['VSA', 1],['GAP', 1],['PPW', 1],['T&W', 1],['Maint.', 1],['Closing %', 1]]} />
+                    <EditRow columns={[[, 1, 'finance'],[, 1, 'vsa'],[, 1, 'gap'],[, 1, 'ppw'],[, 1, 't_w'],[, 1, 'maintanence'],['%', 1]]} />
+
+                    <SubHeader columns={[['Service', 1],['$ Per RO', 1],['Alignment', 1],['Tires', 1]]} />
+                    <EditRow columns={[[, 1, 'service_service'],[, 1, 'service_per_ro'],[, 1, 'service_alignments'],[, 1, 'service_tires']]} />
+
+                    <SubHeader columns={[['Shop Hours', 1]]} />
+                    <EditRow columns={[['Day-CP', 1],[, 1, 'shop_hours_day_cp']]} />
+                    <EditRow columns={[['Day-W', 1],[, 1, 'shop_hours_day_w']]} />
+                    <EditRow columns={[['Day-INT', 1],[, 1, 'shop_hours_day_int']]} />
+                    <EditRow columns={[['Total', 1],['', 1]]} />
                 </div>
             )
         }else{
@@ -204,13 +218,8 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                                 <SubHeader columns={[['', 1], ['Shown', 2], ['Scheduled', 2], ['%', 1]]} />
                                 <Row columns={[['Appointments', 1], [data.appointments.shown, 2], [data.appointments.scheduled, 2], [(parseInt(data.appointments.shown) * 100 / parseInt(data.appointments.scheduled)).toFixed(2) + '%', 1]]} />
                                 <Row columns={[['Walk Ins', 1], [data.appointments.walk_ins, 2], ['', 3]]} />
-                                <Row columns={[['Buy Backs', 1], [data.appointments.buy_backs, 2], ['', 3]]}/>
+                                <Row columns={[['BBacks', 1], [data.appointments.buy_backs, 2], ['', 3]]}/>
                                 <Row columns={[['TOTAL', 1], [parseInt(data.appointments.shown) + parseInt(data.appointments.buy_backs) + parseInt(data.appointments.walk_ins), 2], ['', 2], ['', 1]]} />
-                                
-                                <SubHeader columns={[['PH. Pops', 1]]} />
-                                <Row columns={[['New', 1], [data.phone_pops.new, 2]]} />
-                                <Row columns={[['Used', 1], [data.phone_pops.used, 2]]} />
-                                <Row columns={[['TOTAL', 1], [parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used), 2]]} />
 
                                 <SubHeader columns={[['Sources', 1]]} />
                                 <Row columns={[['Referral', 1], [data.sources.referral, 2]]} />
@@ -220,10 +229,25 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                                 <Row columns={[['Service', 1], [data.sources.service, 2]]} />
                                 <Row columns={[['House', 1], [data.sources.house, 2]]} />
                                 <Row columns={[['Repeat', 1], [data.sources.repeat, 2]]} />
+                                <Row columns={[['Self Generated', 1], [data.sources.self, 2]]} />
                                 <Row columns={[['Total', 1], [Object.values(data.sources).reduce((total, currentValue) => total = total + parseInt(currentValue),0), 2]]} />
 
-                                <SubHeader columns={[['Finance', 1],['VSA', 1],['GAP', 1],['Closing %', 1]]} />
-                                <Row columns={[[data.finance, 1],[data.vsa, 1],[data.gap, 1],[(((parseInt(data.day.units.new) + parseInt(data.day.units.used)) / (parseInt(data.appointments.walk_ins) + parseInt(data.appointments.buy_backs) + parseInt(data.appointments.shown) + parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used))) * 100).toFixed(2) + '%', 1]]} />
+                                <SubHeader columns={[['PH. Pops', 1]]} />
+                                <Row columns={[['New', 1], [data.phone_pops.new, 2]]} />
+                                <Row columns={[['Used', 1], [data.phone_pops.used, 2]]} />
+                                <Row columns={[['TOTAL', 1], [parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used), 2]]} />
+
+                                <SubHeader columns={[['Finance', 1],['VSA', 1],['GAP', 1],['PPW', 1],['T&W', 1],['Maint.', 1],['Closing %', 1]]} />
+                                <Row columns={[[data.finance, 1],[data.vsa, 1],[data.gap, 1],[data.ppw, 1],[data.t_w, 1],[data.maintanence, 1],[(((parseInt(data.day.units.new) + parseInt(data.day.units.used)) / (parseInt(data.appointments.walk_ins) + parseInt(data.appointments.buy_backs) + parseInt(data.appointments.shown) + parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used))) * 100).toFixed(2) + '%', 1]]} />
+
+                                <SubHeader columns={[['Service', 1],['$ Per RO', 1],['Alignment', 1],['Tires', 1]]} />
+                                <Row columns={[[data.service.service, 1],[data.service.per_ro, 1],[data.service.alignments, 1],[data.service.tires, 1]]} />
+
+                                <SubHeader columns={[['Shop Hours', 1]]} />
+                                <Row columns={[['Day-CP', 1],[data.shop_hours.day.cp, 1]]} />
+                                <Row columns={[['Day-W', 1],[data.shop_hours.day.w, 1]]} />
+                                <Row columns={[['Day-INT', 1],[data.shop_hours.day.int, 1]]} />
+                                <Row columns={[['Total', 1],[parseInt(data.shop_hours.day.cp) + parseInt(data.shop_hours.day.w) + parseInt(data.shop_hours.day.int), 1]]} />
 
                             </motion.div>
                         </>
@@ -251,29 +275,40 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
         }
     }
 
-    async function importDocument(data, { date, 
-                                        units_new, 
-                                        units_used, 
-                                        gross_new, 
-                                        gross_used, 
-                                        appraisals_acquired, 
-                                        appraisals_appraised, 
-                                        appointments_shown, 
-                                        appointments_scheduled, 
-                                        appointments_walk_ins, 
-                                        appointments_buy_backs, 
-                                        phone_pops_new, 
-                                        phone_pops_used, 
-                                        sources_referral,
-                                        sources_email,
-                                        sources_phone,
-                                        sources_walk_in,
-                                        sources_service,
-                                        sources_house,
-                                        sources_repeat,
-                                        finance,
-                                        vsa,
-                                        gap }){
+    async function importDocument(data, { 
+                                            units_new, 
+                                            units_used, 
+                                            gross_new, 
+                                            gross_used, 
+                                            appraisals_acquired, 
+                                            appraisals_appraised, 
+                                            appointments_shown, 
+                                            appointments_scheduled, 
+                                            appointments_walk_ins, 
+                                            appointments_buy_backs, 
+                                            phone_pops_new, 
+                                            phone_pops_used, 
+                                            sources_referral,
+                                            sources_email,
+                                            sources_phone,
+                                            sources_walk_in,
+                                            sources_service,
+                                            sources_house,
+                                            sources_repeat,
+                                            sources_self,
+                                            finance,
+                                            vsa,
+                                            gap,
+                                            ppw,
+                                            t_w,
+                                            maintanence,
+                                            service_service,
+                                            service_per_ro,
+                                            service_alignments,
+                                            service_tires,
+                                            shop_hours_day_cp,
+                                            shop_hours_day_w,
+                                            shop_hours_day_int }){
         await updateDailyRecap(data._id, {
             day:{
               units: {
@@ -306,11 +341,28 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                 walk_in: sources_walk_in ? sources_walk_in : data.sources.walk_in,
                 service: sources_service ? sources_service : data.sources.service,
                 house: sources_house ? sources_house : data.sources.house,
-                repeat: sources_repeat ? sources_repeat : data.sources.repeat
+                repeat: sources_repeat ? sources_repeat : data.sources.repeat,
+                self: sources_self ? sources_self : data.sources.self
             },
             finance: finance ? finance : data.finance,
             vsa: vsa ? vsa : data.vsa,
-            gap: gap ? gap : data.gap
+            gap: gap ? gap : data.gap,
+            ppw: ppw ? ppw : data.ppw,
+            t_w: t_w ? t_w : data.t_w,
+            maintanence: maintanence ? maintanence : data.maintanence,
+            service: {
+                service: service_service ? service_service : data.service.service,
+                per_ro: service_per_ro ? service_per_ro : data.service.per_ro,
+                alignments: service_alignments ? service_alignments : data.service.alignments,
+                tires: service_tires ? service_tires : data.service.tires,
+            },
+            shop_hours: {
+                day:{
+                    cp: shop_hours_day_cp ? shop_hours_day_cp : data.shop_hours.day.cp,
+                    w: shop_hours_day_w ? shop_hours_day_w : data.shop_hours.day.w,
+                    int: shop_hours_day_int ? shop_hours_day_int : data.shop_hours.day.int
+                }
+            }
           });
           window.location.reload()
     }

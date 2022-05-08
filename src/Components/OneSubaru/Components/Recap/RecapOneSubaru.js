@@ -21,6 +21,7 @@ export default function RecapOneSubaru(){
     const [ monthlyReduced, setMonthlyReduced ] = useState()
     const [ pace, setPace ] = useState(null)
     const [ workingDays, setWorkingDays ] = useState(new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate())
+    const [ serviceDays, setServiceDays ] = useState(new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate())
 
     useEffect(() => {
         getPerms()
@@ -65,11 +66,28 @@ export default function RecapOneSubaru(){
                     walk_in: 0,
                     service: 0,
                     house: 0,
-                    repeat: 0
+                    repeat: 0,
+                    self: 0
                 },
                 finance: 0,
                 vsa: 0,
-                gap: 0
+                gap: 0,
+                ppw: 0,
+                t_w: 0,
+                maintanence: 0,
+                service: {
+                    service: 0,
+                    per_ro: 0,
+                    alignments: 0,
+                    tires: 0,
+                },
+                shop_hours: {
+                    day:{
+                        cp: 0,
+                        w: 0,
+                        int: 0
+                    }
+                }
             })
 
             setLoading(1)
@@ -97,9 +115,20 @@ export default function RecapOneSubaru(){
                         newObj.sources.service +=  parseInt(curr.sources.service)
                         newObj.sources.house +=  parseInt(curr.sources.house)
                         newObj.sources.repeat +=  parseInt(curr.sources.repeat)
+                        newObj.sources.self +=  parseInt(curr.sources.self)
                         newObj.finance +=  parseInt(curr.finance)
                         newObj.vsa +=  parseInt(curr.vsa)
                         newObj.gap +=  parseInt(curr.gap)
+                        newObj.ppw +=  parseInt(curr.ppw)
+                        newObj.t_w +=  parseInt(curr.t_w)
+                        newObj.maintanence +=  parseInt(curr.maintanence)
+                        newObj.service.service +=  parseInt(curr.service.service)
+                        newObj.service.per_ro +=  parseInt(curr.service.per_ro)
+                        newObj.service.alignments +=  parseInt(curr.service.alignments)
+                        newObj.service.tires +=  parseInt(curr.service.tires)
+                        newObj.shop_hours.day.cp +=  parseInt(curr.shop_hours.day.cp)
+                        newObj.shop_hours.day.w +=  parseInt(curr.shop_hours.day.w)
+                        newObj.shop_hours.day.int +=  parseInt(curr.shop_hours.day.int)
                         newObj.count++
 
                         return newObj
@@ -144,11 +173,28 @@ export default function RecapOneSubaru(){
                     walk_in: 0,
                     service: 0,
                     house: 0,
-                    repeat: 0
+                    repeat: 0,
+                    self: 0
                 },
                 finance: 0,
                 vsa: 0,
-                gap: 0
+                gap: 0,
+                ppw: 0,
+                t_w: 0,
+                maintanence: 0,
+                service: {
+                    service: 0,
+                    per_ro: 0,
+                    alignments: 0,
+                    tires: 0,
+                },
+                shop_hours: {
+                    day:{
+                        cp: 0,
+                        w: 0,
+                        int: 0
+                    }
+                }
             })
 
             setLoading(1)
@@ -177,9 +223,20 @@ export default function RecapOneSubaru(){
                         newObj.sources.service = (monthlyReduced.sources.service / monthlyReduced.count) * workingDays
                         newObj.sources.house = (monthlyReduced.sources.house / monthlyReduced.count) * workingDays
                         newObj.sources.repeat = (monthlyReduced.sources.repeat / monthlyReduced.count) * workingDays
+                        newObj.sources.self = (monthlyReduced.sources.self / monthlyReduced.count) * workingDays
                         newObj.finance = (monthlyReduced.finance / monthlyReduced.count) * workingDays
                         newObj.vsa = (monthlyReduced.vsa / monthlyReduced.count) * workingDays
                         newObj.gap = (monthlyReduced.gap / monthlyReduced.count) * workingDays
+                        newObj.ppw = (monthlyReduced.ppw / monthlyReduced.count) * workingDays
+                        newObj.t_w = (monthlyReduced.t_w / monthlyReduced.count) * workingDays
+                        newObj.maintanence = (monthlyReduced.maintanence / monthlyReduced.count) * workingDays
+                        newObj.service.service = (monthlyReduced.service.service / monthlyReduced.count) * serviceDays
+                        newObj.service.per_ro = (monthlyReduced.service.per_ro / monthlyReduced.count) * serviceDays
+                        newObj.service.alignments = (monthlyReduced.service.alignments / monthlyReduced.count) * serviceDays
+                        newObj.service.tires = (monthlyReduced.service.tires / monthlyReduced.count) * serviceDays
+                        newObj.shop_hours.day.cp = (monthlyReduced.shop_hours.day.cp / monthlyReduced.count) * serviceDays
+                        newObj.shop_hours.day.w = (monthlyReduced.shop_hours.day.w / monthlyReduced.count) * serviceDays
+                        newObj.shop_hours.day.int = (monthlyReduced.shop_hours.day.int / monthlyReduced.count) * serviceDays
                         return newObj
                     })
                 } 
@@ -195,7 +252,7 @@ export default function RecapOneSubaru(){
             }
         }
         run()
-    }, [page, month, year, workingDays])
+    }, [page, month, year, workingDays, serviceDays])
     return(
         <>
             {loading === 1 && <Loading />}
@@ -257,26 +314,48 @@ export default function RecapOneSubaru(){
                         <Modal selected='5e9f9f9f9f9f9f9f9f9f9f9' data={monthlyReduced} perms={perms} setEditing={setEditing} editing={editing} />
                         :
                         pace && <Modal selected='5e8f8f8f8f8f8f8f8f8f8f8' data={pace} perms={perms} setEditing={setEditing} editing={editing} workDaysComponent={
-                            <div 
-                            id='work-days-component'
-                            style={{
-                                position: 'absolute',
-                                top: 60,
-                                left: 10,
-                                height: 50,
-                                width: 250,
-                                border: '1px solid black',
-                            }}>
-                                <input style={{
-                                    width: '100%',
-                                    height: '100%',
-                                    fontSize: 30,
-                                }}
-                                type='number'
-                                onChange={(e) => setWorkingDays(e.target.value)}
-                                onBlur={e => e.target.value = ''}
-                                placeholder={workingDays + ' working days'}/>
-                            </div>
+                            <>
+                                <div 
+                                id='work-days-component'
+                                style={{
+                                    position: 'sticky',
+                                    top: 60,
+                                    left: 10,
+                                    height: 50,
+                                    width: 250,
+                                    border: '1px solid black',
+                                }}>
+                                    <input style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        fontSize: 30,
+                                    }}
+                                    type='number'
+                                    onChange={(e) => setWorkingDays(e.target.value)}
+                                    onBlur={e => e.target.value = ''}
+                                    placeholder={workingDays + ' working days'}/>
+                                </div>
+                                <div 
+                                id='service-days-component'
+                                style={{
+                                    position: 'sticky',
+                                    top: 120,
+                                    left: 10,
+                                    height: 50,
+                                    width: 250,
+                                    border: '1px solid black',
+                                }}>
+                                    <input style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        fontSize: 30,
+                                    }}
+                                    type='number'
+                                    onChange={(e) => setServiceDays(e.target.value)}
+                                    onBlur={e => e.target.value = ''}
+                                    placeholder={serviceDays + ' service days'}/>
+                                </div>
+                            </>
                         } />
                     )}
                 </div>}
