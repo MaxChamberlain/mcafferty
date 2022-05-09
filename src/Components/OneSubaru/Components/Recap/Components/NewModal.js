@@ -71,6 +71,14 @@ export default function NewModal({ setAdding }){
                             shop_hours_day_cp: document.getElementById('shop_hours_day_cp').value ?? 0,
                             shop_hours_day_w: document.getElementById('shop_hours_day_w').value ?? 0,
                             shop_hours_day_int: document.getElementById('shop_hours_day_int').value ?? 0,
+                            contact_emails: document.getElementById('contact-emails').value ?? 0,
+                            contact_texts: document.getElementById('contact-texts').value ?? 0,
+                            contact_appointments: document.getElementById('contact-appointments').value ?? 0,
+                            contact_recalls: document.getElementById('contact-recalls').value ?? 0,
+                            p_a_parts: document.getElementById('p_a-parts').value ?? 0,
+                            p_a_accessories: document.getElementById('p_a-accessories').value ?? 0,
+                            wholesale_units: document.getElementById('wholesale-units').value,
+                            wholesale_amount: document.getElementById('wholesale-amount').value,
                         }
                     )
                     setAdding(false)
@@ -135,6 +143,16 @@ export default function NewModal({ setAdding }){
             <EditRow columns={[['Day-INT', 1],[, 1, 'shop_hours_day_int']]} />
             <EditRow columns={[['Total', 1],['', 1]]} />
 
+            <SubHeader columns={[['Emails', 1], ['Texts', 1], ['Appointments', 1], ['Recalls', 1],]} />
+            <EditRow columns={[[, 1, 'contact-emails'], [, 1, 'contact-texts'], [, 1, 'contact-appointments'], [, 1, 'contact-recalls']]} />
+
+            <SubHeader columns={[['Parts', 1], ['Accessories', 1]]} />
+            <EditRow columns={[[, 1, 'p_a-parts'],[, 1, 'p_a-accessories']]} />
+
+            <SubHeader columns={[['Wholesale', 1]]} />
+            <EditRow columns={[['Units', 1],[, 2, 'wholesale-units']]} />
+            <EditRow columns={[['Amount', 1],[, 2, 'wholesale-amount']]} />
+
         </div>
     )
 
@@ -171,7 +189,15 @@ export default function NewModal({ setAdding }){
                                     service_tires,
                                     shop_hours_day_cp,
                                     shop_hours_day_w,
-                                    shop_hours_day_int }){
+                                    shop_hours_day_int,
+                                    contact_emails,
+                                    contact_texts,
+                                    contact_appointments,
+                                    contact_recalls,
+                                    p_a_parts,
+                                    p_a_accessories,
+                                    wholesale_units,
+                                    wholesale_amount, }){
         console.log(sources_referral)
         await newDailyRecap({
             location: 'one_subaru',
@@ -228,6 +254,20 @@ export default function NewModal({ setAdding }){
                     w: shop_hours_day_w,
                     int: shop_hours_day_int
                 }
+            },
+            contact: {
+                emails: contact_emails,
+                texts: contact_texts,
+                appointments: contact_appointments,
+                recalls: contact_recalls
+            },
+            p_a: {
+                parts: p_a_parts,
+                accessories: p_a_accessories
+            },
+            wholesale: {
+                units: wholesale_units,
+                amount: wholesale_amount
             }
           });
           window.location.reload()

@@ -1,7 +1,7 @@
 export default function EditRow({ columns }){
     return (
         <div style={{
-            width: '100%',
+            width: '100% !important',
             backgroundColor: '#eee',
             color: 'black',
             fontWeight: 'bold',
@@ -23,6 +23,7 @@ export default function EditRow({ columns }){
                     <input style={{
                         flex: e[1],
                         fontSize: 15,
+                        minWidth: 5
                     }} 
                     placeholder={e[0]}
                     id={e[2]}

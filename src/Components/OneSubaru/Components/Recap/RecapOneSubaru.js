@@ -87,6 +87,20 @@ export default function RecapOneSubaru(){
                         w: 0,
                         int: 0
                     }
+                },
+                contact: {
+                    emails: 0,
+                    texts: 0,
+                    appointments: 0,
+                    recalls: 0
+                },
+                p_a: {
+                    parts: 0,
+                    accessories: 0
+                },
+                wholesale: {
+                    units: 0,
+                    amount: 0
                 }
             })
 
@@ -129,6 +143,14 @@ export default function RecapOneSubaru(){
                         newObj.shop_hours.day.cp +=  parseInt(curr.shop_hours.day.cp)
                         newObj.shop_hours.day.w +=  parseInt(curr.shop_hours.day.w)
                         newObj.shop_hours.day.int +=  parseInt(curr.shop_hours.day.int)
+                        newObj.contact.emails +=  parseInt(curr.contact.emails)
+                        newObj.contact.texts +=  parseInt(curr.contact.texts)
+                        newObj.contact.appointments +=  parseInt(curr.contact.appointments)
+                        newObj.contact.recalls +=  parseInt(curr.contact.recalls)
+                        newObj.p_a.parts +=  parseInt(curr.p_a.parts)
+                        newObj.p_a.accessories +=  parseInt(curr.p_a.accessories)  
+                        newObj.wholesale.units +=  parseInt(curr.wholesale.units)
+                        newObj.wholesale.amount +=  parseInt(curr.wholesale.amount) 
                         newObj.count++
 
                         return newObj
@@ -194,6 +216,20 @@ export default function RecapOneSubaru(){
                         w: 0,
                         int: 0
                     }
+                },
+                contact: {
+                    emails: 0,
+                    texts: 0,
+                    appointments: 0,
+                    recalls: 0
+                },
+                p_a: {
+                    parts: 0,
+                    accessories: 0
+                },
+                wholesale: {
+                    units: 0,
+                    amount: 0
                 }
             })
 
@@ -237,6 +273,15 @@ export default function RecapOneSubaru(){
                         newObj.shop_hours.day.cp = (monthlyReduced.shop_hours.day.cp / monthlyReduced.count) * serviceDays
                         newObj.shop_hours.day.w = (monthlyReduced.shop_hours.day.w / monthlyReduced.count) * serviceDays
                         newObj.shop_hours.day.int = (monthlyReduced.shop_hours.day.int / monthlyReduced.count) * serviceDays
+                        newObj.contact.emails = (monthlyReduced.contact.emails / monthlyReduced.count) * serviceDays
+                        newObj.contact.texts = (monthlyReduced.contact.texts / monthlyReduced.count) * serviceDays
+                        newObj.contact.appointments = (monthlyReduced.contact.appointments / monthlyReduced.count) * serviceDays
+                        newObj.contact.recalls = (monthlyReduced.contact.recalls / monthlyReduced.count) * serviceDays
+                        newObj.p_a.parts = (monthlyReduced.p_a.parts / monthlyReduced.count) * serviceDays
+                        newObj.p_a.accessories = (monthlyReduced.p_a.accessories / monthlyReduced.count) * serviceDays
+                        newObj.wholesale.units = (monthlyReduced.wholesale.units / monthlyReduced.count) * workingDays
+                        newObj.wholesale.amount = (monthlyReduced.wholesale.amount / monthlyReduced.count) * workingDays
+
                         return newObj
                     })
                 } 

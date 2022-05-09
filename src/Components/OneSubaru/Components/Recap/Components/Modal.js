@@ -70,6 +70,21 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                                     ppw: document.getElementById('ppw').value,
                                     t_w: document.getElementById('t_w').value,
                                     maintanence: document.getElementById('maintanence').value,
+                                    service_service: document.getElementById('service_service').value,
+                                    service_per_ro: document.getElementById('service_per_ro').value,
+                                    service_alignments: document.getElementById('service_alignments').value,
+                                    service_tires: document.getElementById('service_tires').value,
+                                    shop_hours_day_cp: document.getElementById('shop_hours_day_cp').value,
+                                    shop_hours_day_w: document.getElementById('shop_hours_day_w').value,
+                                    shop_hours_day_int: document.getElementById('shop_hours_day_int').value,
+                                    contact_emails: document.getElementById('contact-emails').value,
+                                    contact_texts: document.getElementById('contact-texts').value,
+                                    contact_appointments: document.getElementById('contact-appointments').value,
+                                    contact_recalls: document.getElementById('contact-recalls').value,
+                                    p_a_parts: document.getElementById('p_a-parts').value,
+                                    p_a_accessories: document.getElementById('p_a-accessories').value,
+                                    wholesale_units: document.getElementById('wholesale-units').value,
+                                    wholesale_amount: document.getElementById('wholesale-amount').value,
                                 }
                             )
                             setEditing(null)
@@ -126,32 +141,42 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                     <EditRow columns={[['TOTAL', 1], [data.appointments.shown + data.appointments.buy_backs + data.appointments.walk_ins, 2], ['', 2], ['', 1]]} />
 
                     <SubHeader columns={[['Sources', 1]]} />
-                    <EditRow columns={[['Referral', 1], [, 1, 'sources-referral']]} />
-                    <EditRow columns={[['Email', 1], [, 1, 'sources-email']]} />
-                    <EditRow columns={[['Phone', 1], [, 1, 'sources-phone']]} />
-                    <EditRow columns={[['Walk In', 1], [, 1, 'sources-walk_in']]} />
-                    <EditRow columns={[['Service', 1], [, 1, 'sources-service']]} />
-                    <EditRow columns={[['House', 1], [, 1, 'sources-house']]} />
-                    <EditRow columns={[['Repeat', 1], [, 1, 'sources-repeat']]} />
-                    <EditRow columns={[['Self Generated', 1], [, 1, 'sources-self_generated']]} />
+                    <EditRow columns={[['Referral', 1], [parseInt(data.sources.referral), 1, 'sources-referral']]} />
+                    <EditRow columns={[['Email', 1], [parseInt(data.sources.email), 1, 'sources-email']]} />
+                    <EditRow columns={[['Phone', 1], [parseInt(data.sources.phone), 1, 'sources-phone']]} />
+                    <EditRow columns={[['Walk In', 1], [parseInt(data.sources.walk_in), 1, 'sources-walk_in']]} />
+                    <EditRow columns={[['Service', 1], [parseInt(data.sources.service), 1, 'sources-service']]} />
+                    <EditRow columns={[['House', 1], [parseInt(data.sources.house), 1, 'sources-house']]} />
+                    <EditRow columns={[['Repeat', 1], [parseInt(data.sources.repeat), 1, 'sources-repeat']]} />
+                    <EditRow columns={[['Self Generated', 1], [parseInt(data.sources.self), 1, 'sources-self_generated']]} />
                     <EditRow columns={[['Total', 1], ['', 2]]} />
 
                     <SubHeader columns={[['PH. Pops', 1]]} />
-                    <EditRow columns={[['New', 1], [, 2, 'ph-pops-new']]} />
-                    <EditRow columns={[['Used', 1], [, 2, 'ph-pops-used']]} />
+                    <EditRow columns={[['New', 1], [parseInt(data.phone_pops.new), 2, 'ph-pops-new']]} />
+                    <EditRow columns={[['Used', 1], [parseInt(data.phone_pops.used), 2, 'ph-pops-used']]} />
                     <Row columns={[['TOTAL', 1], ['', 2]]} />
 
                     <SubHeader columns={[['Finance', 1],['VSA', 1],['GAP', 1],['PPW', 1],['T&W', 1],['Maint.', 1],['Closing %', 1]]} />
-                    <EditRow columns={[[, 1, 'finance'],[, 1, 'vsa'],[, 1, 'gap'],[, 1, 'ppw'],[, 1, 't_w'],[, 1, 'maintanence'],['%', 1]]} />
+                    <EditRow columns={[[parseInt(data.finance), 1, 'finance'],[parseInt(data.vsa), 1, 'vsa'],[parseInt(data.gap), 1, 'gap'],[parseInt(data.ppw), 1, 'ppw'],[parseInt(data.t_w), 1, 't_w'],[parseInt(data.maintanence), 1, 'maintanence'],['%', 1]]} />
 
                     <SubHeader columns={[['Service', 1],['$ Per RO', 1],['Alignment', 1],['Tires', 1]]} />
-                    <EditRow columns={[[, 1, 'service_service'],[, 1, 'service_per_ro'],[, 1, 'service_alignments'],[, 1, 'service_tires']]} />
+                    <EditRow columns={[[parseInt(data.service.service), 1, 'service_service'],[parseInt(data.service.per_ro), 1, 'service_per_ro'],[parseInt(data.service.alignments), 1, 'service_alignments'],[parseInt(data.service.tires), 1, 'service_tires']]} />
 
                     <SubHeader columns={[['Shop Hours', 1]]} />
-                    <EditRow columns={[['Day-CP', 1],[, 1, 'shop_hours_day_cp']]} />
-                    <EditRow columns={[['Day-W', 1],[, 1, 'shop_hours_day_w']]} />
-                    <EditRow columns={[['Day-INT', 1],[, 1, 'shop_hours_day_int']]} />
+                    <EditRow columns={[['Day-CP', 1],[parseInt(data.shop_hours.day.cp), 1, 'shop_hours_day_cp']]} />
+                    <EditRow columns={[['Day-W', 1],[parseInt(data.shop_hours.day.w), 1, 'shop_hours_day_w']]} />
+                    <EditRow columns={[['Day-INT', 1],[parseInt(data.shop_hours.day.int), 1, 'shop_hours_day_int']]} />
                     <EditRow columns={[['Total', 1],['', 1]]} />
+
+                    <SubHeader columns={[['Emails', 1], ['Texts', 1], ['Appointments', 1], ['Recalls', 1],]} />
+                    <EditRow columns={[[parseInt(data.contact.emails), 1, 'contact-emails'], [parseInt(data.contact.texts), 1, 'contact-texts'], [parseInt(data.contact.appointments), 1, 'contact-appointments'], [parseInt(data.contact.recalls), 1, 'contact-recalls']]} />
+
+                    <SubHeader columns={[['Parts', 1], ['Accessories', 1]]} />
+                    <EditRow columns={[[parseInt(data.p_a.parts), 1, 'p_a-parts'],[parseInt(data.p_a.accessories), 1, 'p_a-accessories']]} />
+
+                    <SubHeader columns={[['Wholesale', 1]]} />
+                    <EditRow columns={[['Units', 1],[parseInt(data.wholesale.units), 2, 'wholesale-units']]} />
+                    <EditRow columns={[['Amount', 1],[parseInt(data.wholesale.amount), 2, 'wholesale-amount']]} />
                 </div>
             )
         }else{
@@ -249,6 +274,16 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                                 <Row columns={[['Day-INT', 1],[data.shop_hours.day.int, 1]]} />
                                 <Row columns={[['Total', 1],[parseInt(data.shop_hours.day.cp) + parseInt(data.shop_hours.day.w) + parseInt(data.shop_hours.day.int), 1]]} />
 
+                                <SubHeader columns={[['Emails', 1], ['Texts', 1], ['Appointments', 1], ['Recalls', 1],]} />
+                                <Row columns={[[data.contact.emails, 1], [data.contact.texts, 1], [data.contact.appointments, 1], [data.contact.recalls, 1]]} />
+
+                                <SubHeader columns={[['Parts', 1], ['Accessories', 1]]} />
+                                <Row columns={[[data.p_a.parts, 1],[data.p_a.accessories, 1]]} />
+
+                                <SubHeader columns={[['Wholesale', 1]]} />
+                                <Row columns={[['Units', 1],[data.wholesale.units, 2]]} />
+                                <Row columns={[['Amount', 1],[data.wholesale.amount, 2]]} />
+
                             </motion.div>
                         </>
                             :
@@ -308,7 +343,15 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                                             service_tires,
                                             shop_hours_day_cp,
                                             shop_hours_day_w,
-                                            shop_hours_day_int }){
+                                            shop_hours_day_int,
+                                            contact_emails,
+                                            contact_texts,
+                                            contact_appointments,
+                                            contact_recalls,
+                                            p_a_parts,
+                                            p_a_accessories,
+                                            wholesale_units,
+                                            wholesale_amount, }){
         await updateDailyRecap(data._id, {
             day:{
               units: {
@@ -362,6 +405,20 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                     w: shop_hours_day_w ? shop_hours_day_w : data.shop_hours.day.w,
                     int: shop_hours_day_int ? shop_hours_day_int : data.shop_hours.day.int
                 }
+            },
+            contact: {
+                emails: contact_emails ? contact_emails : data.contact.emails,
+                texts: contact_texts ? contact_texts : data.contact.texts,
+                appointments: contact_appointments ? contact_appointments : data.contact.appointments,
+                recalls: contact_recalls ? contact_recalls : data.contact.recalls,
+            },
+            p_a: {
+                parts: p_a_parts ? p_a_parts : data.p_a.parts,
+                accessories: p_a_accessories ? p_a_accessories : data.p_a.accessories,
+            },
+            wholesale: {
+                units: wholesale_units ? wholesale_units : data.wholesale.units,
+                amount: wholesale_amount ? wholesale_amount : data.wholesale.amount
             }
           });
           window.location.reload()
@@ -384,6 +441,7 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
             { label: "", key: "c4" },
             { label: "", key: "c5" },
             { label: "", key: "c6" },
+            { label: "", key: "c7" },
         ]
 
         const exportData = [
@@ -402,11 +460,45 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
             { c1: 'Buy Backs', c2: data.appointments.buy_backs },
             { c1: 'Total', c2: parseInt(data.appointments.buy_backs) + parseInt(data.appointments.walk_ins) + parseInt(data.appraisals.acquired) },
             { c1: ' ' },
+            { c1: ' ', c2: 'Sources', c3: ' ' },
+            { c1: 'Referral', c2: data.sources.referral },
+            { c1: 'Email', c2: data.sources.email },
+            { c1: 'Phone', c2: data.sources.phone },
+            { c1: 'Walk In', c2: data.sources.walk_in },
+            { c1: 'Service', c2: data.sources.service },
+            { c1: 'House', c2: data.sources.house },
+            { c1: 'Repeat', c2: data.sources.repeat },
+            { c1: 'Self Generated', c2: data.sources.self },
+            { c1: 'Total', c2: Object.values(data.sources).reduce((total, currentValue) => total = total + parseInt(currentValue),0) },
+            { c1: ' ' },
             { c1: ' ', c2: 'Phone Pops', c3: ' ' },
             { c1: 'New', c2: data.phone_pops.new },
             { c1: 'Used', c2: data.phone_pops.used },
             { c1: 'Total', c2: parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used) },
+            { c1: 'Finance', c2: 'VSA', c3: 'Gap', c4: 'PPW', c5: 'T&W', c6: 'Maintanence', c7: 'Closing %' },
+            { c1: data.finance, c2: data.vsa, c3: data.gap, c4: data.ppw, c5: data.t_w, c6: data.maintanence, c7: (((parseInt(data.day.units.new) + parseInt(data.day.units.used)) / (parseInt(data.appointments.walk_ins) + parseInt(data.appointments.buy_backs) + parseInt(data.appointments.shown) + parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used))) * 100).toFixed(2) + '%' },
+            { c1: ' ' },
+            { c1: 'Service', c2: '$ Per RO', c3: 'Alignment', c4: 'Tires' },
+            { c1: data.service.service, c2: data.service.per_ro, c3: data.service.alignments, c4: data.service.tires},
+            { c1: ' ' },
+            { c2: 'Shop Hours'},
+            { c1: 'Day-CP', c2: data.shop_hours.day.cp },
+            { c1: 'Day-W', c2: data.shop_hours.day.w },
+            { c1: 'Day-INT', c2: data.shop_hours.day.int },
+            { c1: 'Total', c2: parseInt(data.shop_hours.day.cp) + parseInt(data.shop_hours.day.w) + parseInt(data.shop_hours.day.int)},
+            { c1: ' ' },
+            { c1: 'Emails', c2: 'Texts', c3: 'Appointments', c4: 'Recalls' },
+            { c1: data.contact.emails, c2: data.contact.texts, c3: data.contact.appointments, c4: data.contact.recalls},
+            { c1: ' ' },
+            { c1: 'Parts', c2: 'Accessories' },
+            { c1: data.p_a.parts, c2: data.p_a.accessories},
+            { c1: ' ' },
+            { c2: 'Wholesale' },
+            { c1: 'Units', c2: 'Amount' },
+            { c1: data.wholesale.units, c2: data.wholesale.amount},
         ]
+
+
 
         const csvReport = {
             data: exportData,
