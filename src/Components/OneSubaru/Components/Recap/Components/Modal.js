@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import './Modal.css'
 import { CSVLink } from 'react-csv';
 
-export default function Modal({ data, editing, setEditing, perms, page, selected, setSelected, workDaysComponent }){
+export default function Modal({ data, editing, setEditing, perms, page, selected, setSelected, workDaysComponent, isAll }){
     if(data.date > 0 && data.date <= 12){
         data.date = new Date(`${data.date}/1/2000`).toDateString().slice(4, 7)
     }   
@@ -197,7 +197,7 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                         marginBottom: 50
                     }}>
                         <>
-                            {(perms.admin || perms.edit) && page === 'day' &&
+                            {(perms.admin || perms.edit) && page === 'day' && !isAll &&
                             <svg viewBox="0 0 300 300" style={{ width: 25, height: 25, position: 'absolute', top: selected === data._id ? 47.5 : 7.5, right: 7.5, zIndex: 9998, filter: 'invert()', cursor: 'pointer' }}
                             onClick={() => setEditing(data._id)}>
                                 <g>

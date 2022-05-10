@@ -118,6 +118,10 @@ export const getDailyRecaps = async (location) => {
       location: location
     }
   }
+
+  if (location === 'all') {
+    delete query.filter.location
+  }
   
   let config = {
     method: 'post',

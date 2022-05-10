@@ -7,6 +7,8 @@ import Home from './Components/Home/Home'
 import Settings from './Components/Settings/Settings'
 import OneSubaru from './Components/OneSubaru/OneSubaru'
 import RecapOneSubaru from './Components/OneSubaru/Components/Recap/RecapOneSubaru'
+import OneAutomotive from './Components/OneAutomotive/OneAutomotive'
+import OneAutoRecap from './Components/OneAutomotive/Components/Recap/RecapOneAuto'
 import {useLocation} from "react-router-dom";
 import './App.css'
 
@@ -31,6 +33,8 @@ export default function App() {
           <Route path='/settings' element={<Settings />} />
           <Route path='/onesubaru' element={<OneSubaru />} />
           <Route path='/onesubaru/recaps' element={<RecapOneSubaru />} />
+          <Route path='/oneauto' element={<OneAutomotive />} />
+          <Route path='/oneauto/recaps' element={<OneAutoRecap />} />
         </Routes>
       </AnimatePresence>
     )

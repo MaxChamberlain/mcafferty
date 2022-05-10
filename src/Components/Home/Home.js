@@ -1,4 +1,5 @@
 import { motion } from "framer-motion"
+import { NavLink } from "react-router-dom"
 import Button from "./Components/Button"
 import './Components/stylesheet.css'
 const subaru_logo = require('../../Assets/Images/subaru_logo.png')
@@ -22,6 +23,37 @@ export default function Home(){
             right: 0,
             bottom: 0,
         }}>
+        <NavLink to={`/oneauto`} style={{
+            width: '100vw',
+            height: 200,
+            borderRadius: 5,
+            fontSize: 30,
+            fontWeight: 'bold',
+            textAlign: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            color: 'black',
+            textDecoration: 'none',
+            position: 'relative',
+            backgroundColor: '#f8f8f8',
+            marginTop: 60,
+            marginBottom: 60,
+        }}>
+            <motion.div
+            id='home-button-nav-container-bg'
+            style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+            }}
+            whileHover={{ filter: 'blur(0) brightness(1)'}}>
+            </motion.div>
+            <div style={{zIndex: 999, marginTop: 100, height: 200}}>
+                One Automotive
+            </div>
+        </NavLink>
             <div 
             id='home-button-nav-container'
             style={{
