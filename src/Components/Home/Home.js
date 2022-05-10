@@ -5,9 +5,9 @@ import './Components/stylesheet.css'
 const subaru_logo = require('../../Assets/Images/subaru_logo.png')
 const toyota_logo = require('../../Assets/Images/toyota_logo.png')
 const toyota_logo_dark = require('../../Assets/Images/toyota_logo_dark.png')
-const subaru_wrx_image = require('../../Assets/Images/subaru_wrx_image.webp')
-const toyota_tundra_image = require('../../Assets/Images/toyota_tundra_image.png')
-const toyota_rav4_image = require('../../Assets/Images/toyota_rav4_image.png')
+const wrx_image = require('../../Assets/Images/wrx_image.jpg')
+const tundra_image = require('../../Assets/Images/tundra_image.webp')
+const highlander_image = require('../../Assets/Images/highlander_image.jpg')
 
 export default function Home(){
 
@@ -35,9 +35,7 @@ export default function Home(){
             color: 'black',
             textDecoration: 'none',
             position: 'relative',
-            backgroundColor: '#f8f8f8',
-            marginTop: 60,
-            marginBottom: 60,
+            marginBottom: 10,
         }}>
             <motion.div
             id='home-button-nav-container-bg'
@@ -47,8 +45,9 @@ export default function Home(){
                 left: 0,
                 right: 0,
                 bottom: 0,
+                backgroundColor: '#eee',
             }}
-            whileHover={{ filter: 'blur(0) brightness(1)'}}>
+            whileHover={{ backgroundColor: '#ccc' }}>
             </motion.div>
             <div style={{zIndex: 999, marginTop: 100, height: 200}}>
                 One Automotive
@@ -72,9 +71,9 @@ export default function Home(){
                         left: 0,
                         right: 0,
                         bottom: 0,
-                        backgroundImage: `url(${subaru_wrx_image})`,
-                        backgroundSize: 1000,
-                        backgroundPosition: '0 100%',
+                        backgroundImage: `url(${wrx_image})`,
+                        backgroundSize: 1200,
+                        backgroundPosition: '50% 50%',
                         backgroundRepeat: 'no-repeat',
                         filter: 'blur(2px) brightness(0.8)',
                         transform: 'scale(1)',
@@ -99,9 +98,9 @@ export default function Home(){
                         left: 0,
                         right: 0,
                         bottom: 0,
-                        backgroundImage: `url(${toyota_tundra_image})`,
-                        backgroundSize: 1000,
-                        backgroundPosition: '0 90%',
+                        backgroundImage: `url(${highlander_image})`,
+                        backgroundSize: 1300,
+                        backgroundPosition: '20% 50%',
                         backgroundRepeat: 'no-repeat',
                         filter: 'blur(2px) brightness(0.8)',
                         transform: 'scale(1)',
@@ -126,9 +125,9 @@ export default function Home(){
                         left: 0,
                         right: 0,
                         bottom: 0,
-                        backgroundImage: `url(${toyota_rav4_image})`,
-                        backgroundSize: 900,
-                        backgroundPosition: '150% 85%',
+                        backgroundImage: `url(${tundra_image})`,
+                        backgroundSize: 1300,
+                        backgroundPosition: '80% 100%',
                         backgroundRepeat: 'no-repeat',
                         filter: 'blur(2px) brightness(0.8)',
                         transform: 'scale(1)',
