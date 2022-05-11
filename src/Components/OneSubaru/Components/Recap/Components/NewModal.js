@@ -68,6 +68,7 @@ export default function NewModal({ setAdding }){
                             service_per_ro: document.getElementById('service_per_ro').value ?? 0,
                             service_alignments: document.getElementById('service_alignments').value ?? 0,
                             service_tires: document.getElementById('service_tires').value ?? 0,
+                            service_open_ros: document.getElementById('service_open_ros').value ?? 0,
                             shop_hours_day_cp: document.getElementById('shop_hours_day_cp').value ?? 0,
                             shop_hours_day_w: document.getElementById('shop_hours_day_w').value ?? 0,
                             shop_hours_day_int: document.getElementById('shop_hours_day_int').value ?? 0,
@@ -134,8 +135,8 @@ export default function NewModal({ setAdding }){
             <SubHeader columns={[['Finance', 1],['VSA', 1],['GAP', 1],['PPW', 1],['T&W', 1],['Maint.', 1],['Closing %', 1]]} />
             <EditRow columns={[[, 1, 'finance'],[, 1, 'vsa'],[, 1, 'gap'],[, 1, 'ppw'],[, 1, 't_w'],[, 1, 'maintanence'],['%', 1]]} />
 
-            <SubHeader columns={[['Service', 1],['$ Per RO', 1],['Alignment', 1],['Tires', 1]]} />
-            <EditRow columns={[[, 1, 'service_service'],[, 1, 'service_per_ro'],[, 1, 'service_alignments'],[, 1, 'service_tires']]} />
+            <SubHeader columns={[['Service', 1],['$ Per RO', 1],['Alignment', 1],['Tires', 1], ['Open ROs', 1]]} />
+            <EditRow columns={[[, 1, 'service_service'],[, 1, 'service_per_ro'],[, 1, 'service_alignments'],[, 1, 'service_tires'],[, 1, 'service_open_ros']]} />
 
             <SubHeader columns={[['Shop Hours', 1]]} />
             <EditRow columns={[['Day-CP', 1],[, 1, 'shop_hours_day_cp']]} />
@@ -187,6 +188,7 @@ export default function NewModal({ setAdding }){
                                     service_per_ro,
                                     service_alignments,
                                     service_tires,
+                                    service_open_ros,
                                     shop_hours_day_cp,
                                     shop_hours_day_w,
                                     shop_hours_day_int,
@@ -247,6 +249,7 @@ export default function NewModal({ setAdding }){
                 per_ro: service_per_ro,
                 alignments: service_alignments,
                 tires: service_tires,
+                open_ros: service_open_ros
             },
             shop_hours: {
                 day:{

@@ -74,6 +74,7 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                                     service_per_ro: document.getElementById('service_per_ro').value,
                                     service_alignments: document.getElementById('service_alignments').value,
                                     service_tires: document.getElementById('service_tires').value,
+                                    service_open_ros: document.getElementById('service_open_ros').value,
                                     shop_hours_day_cp: document.getElementById('shop_hours_day_cp').value,
                                     shop_hours_day_w: document.getElementById('shop_hours_day_w').value,
                                     shop_hours_day_int: document.getElementById('shop_hours_day_int').value,
@@ -159,8 +160,8 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                     <SubHeader columns={[['Finance', 1],['VSA', 1],['GAP', 1],['PPW', 1],['T&W', 1],['Maint.', 1],['Closing %', 1]]} />
                     <EditRow columns={[[parseInt(data.finance), 1, 'finance'],[parseInt(data.vsa), 1, 'vsa'],[parseInt(data.gap), 1, 'gap'],[parseInt(data.ppw), 1, 'ppw'],[parseInt(data.t_w), 1, 't_w'],[parseInt(data.maintanence), 1, 'maintanence'],['%', 1]]} />
 
-                    <SubHeader columns={[['Service', 1],['$ Per RO', 1],['Alignment', 1],['Tires', 1]]} />
-                    <EditRow columns={[[parseInt(data.service.service), 1, 'service_service'],[parseInt(data.service.per_ro), 1, 'service_per_ro'],[parseInt(data.service.alignments), 1, 'service_alignments'],[parseInt(data.service.tires), 1, 'service_tires']]} />
+                    <SubHeader columns={[['Service', 1],['$ Per RO', 1],['Alignment', 1],['Tires', 1], ['Open ROs', 1]]} />
+                    <EditRow columns={[[parseInt(data.service.service), 1, 'service_service'],[parseInt(data.service.per_ro), 1, 'service_per_ro'],[parseInt(data.service.alignments), 1, 'service_alignments'],[parseInt(data.service.tires), 1, 'service_tires'],[parseInt(data.service.tires), 1, 'service_open_ros']]} />
 
                     <SubHeader columns={[['Shop Hours', 1]]} />
                     <EditRow columns={[['Day-CP', 1],[parseInt(data.shop_hours.day.cp), 1, 'shop_hours_day_cp']]} />
@@ -265,8 +266,8 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                                 <SubHeader columns={[['Finance', 1],['VSA', 1],['GAP', 1],['PPW', 1],['T&W', 1],['Maint.', 1],['Closing %', 1]]} />
                                 <Row columns={[[data.finance, 1],[data.vsa, 1],[data.gap, 1],[data.ppw, 1],[data.t_w, 1],[data.maintanence, 1],[(((parseInt(data.day.units.new) + parseInt(data.day.units.used)) / (parseInt(data.appointments.walk_ins) + parseInt(data.appointments.buy_backs) + parseInt(data.appointments.shown) + parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used))) * 100).toFixed(2) + '%', 1]]} />
 
-                                <SubHeader columns={[['Service', 1],['$ Per RO', 1],['Alignment', 1],['Tires', 1]]} />
-                                <Row columns={[[data.service.service, 1],[data.service.per_ro, 1],[data.service.alignments, 1],[data.service.tires, 1]]} />
+                                <SubHeader columns={[['Service', 1],['$ Per RO', 1],['Alignment', 1],['Tires', 1], ['Open ROs', 1]]} />
+                                <Row columns={[[data.service.service, 1],[data.service.per_ro, 1],[data.service.alignments, 1],[data.service.tires, 1],[parseInt(data.service.open_ros), 1]]} />
 
                                 <SubHeader columns={[['Shop Hours', 1]]} />
                                 <Row columns={[['Day-CP', 1],[data.shop_hours.day.cp, 1]]} />
@@ -341,6 +342,7 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                                             service_per_ro,
                                             service_alignments,
                                             service_tires,
+                                            service_open_ros,
                                             shop_hours_day_cp,
                                             shop_hours_day_w,
                                             shop_hours_day_int,
@@ -398,6 +400,7 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                 per_ro: service_per_ro ? service_per_ro : data.service.per_ro,
                 alignments: service_alignments ? service_alignments : data.service.alignments,
                 tires: service_tires ? service_tires : data.service.tires,
+                open_ros: service_open_ros ? service_open_ros : data.service.open_ros, 
             },
             shop_hours: {
                 day:{
