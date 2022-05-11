@@ -80,6 +80,7 @@ export default function RecapOneAuto(){
                     per_ro: 0,
                     alignments: 0,
                     tires: 0,
+                    open_ros: 0,
                 },
                 shop_hours: {
                     day:{
@@ -140,6 +141,7 @@ export default function RecapOneAuto(){
                         newObj.service.per_ro +=  parseInt(curr.service.per_ro)
                         newObj.service.alignments +=  parseInt(curr.service.alignments)
                         newObj.service.tires +=  parseInt(curr.service.tires)
+                        newObj.service.open_ros +=  parseInt(curr.service.open_ros)
                         newObj.shop_hours.day.cp +=  parseInt(curr.shop_hours.day.cp)
                         newObj.shop_hours.day.w +=  parseInt(curr.shop_hours.day.w)
                         newObj.shop_hours.day.int +=  parseInt(curr.shop_hours.day.int)
@@ -209,6 +211,7 @@ export default function RecapOneAuto(){
                     per_ro: 0,
                     alignments: 0,
                     tires: 0,
+                    new_ros: 0,
                 },
                 shop_hours: {
                     day:{
@@ -270,6 +273,7 @@ export default function RecapOneAuto(){
                         newObj.service.per_ro = (monthlyReduced.service.per_ro / monthlyReduced.count) * serviceDays
                         newObj.service.alignments = (monthlyReduced.service.alignments / monthlyReduced.count) * serviceDays
                         newObj.service.tires = (monthlyReduced.service.tires / monthlyReduced.count) * serviceDays
+                        newObj.service.new_ros = (monthlyReduced.service.new_ros / monthlyReduced.count) * serviceDays
                         newObj.shop_hours.day.cp = (monthlyReduced.shop_hours.day.cp / monthlyReduced.count) * serviceDays
                         newObj.shop_hours.day.w = (monthlyReduced.shop_hours.day.w / monthlyReduced.count) * serviceDays
                         newObj.shop_hours.day.int = (monthlyReduced.shop_hours.day.int / monthlyReduced.count) * serviceDays
