@@ -6,7 +6,6 @@ import WeekendModal from './Components/WeekendModal'
 import NewModal from './Components/NewModal'
 import { getUser, getDailyRecaps } from "../../../../fetchData/requestDB";
 import {Loading, Failed, Success} from '../../../Loading'
-import { CSVLink } from "react-csv";
 
 export default function RecapOneSubaru(){
     const [ perms, setPerms ] = useState(null)
@@ -243,48 +242,48 @@ export default function RecapOneSubaru(){
                         let newObj = Object.assign(prevState)
 
 
-                        newObj.day.units.new = (monthlyReduced.day.units.new / monthlyReduced.count) * workingDays
-                        newObj.day.units.used = (monthlyReduced.day.units.used / monthlyReduced.count) * workingDays
-                        newObj.day.gross.new = (monthlyReduced.day.gross.new / monthlyReduced.count) * workingDays
-                        newObj.day.gross.used = (monthlyReduced.day.gross.used / monthlyReduced.count) * workingDays
-                        newObj.appraisals.acquired = (monthlyReduced.appraisals.acquired / monthlyReduced.count) * workingDays
-                        newObj.appraisals.appraised = (monthlyReduced.appraisals.appraised / monthlyReduced.count) * workingDays
-                        newObj.appointments.shown = (monthlyReduced.appointments.shown / monthlyReduced.count) * workingDays
-                        newObj.appointments.scheduled = (monthlyReduced.appointments.scheduled / monthlyReduced.count) * workingDays
-                        newObj.appointments.walk_ins = (monthlyReduced.appointments.walk_ins / monthlyReduced.count) * workingDays
-                        newObj.appointments.buy_backs = (monthlyReduced.appointments.buy_backs / monthlyReduced.count) * workingDays
-                        newObj.phone_pops.new = (monthlyReduced.phone_pops.new / monthlyReduced.count) * workingDays
-                        newObj.phone_pops.used = (monthlyReduced.phone_pops.used / monthlyReduced.count) * workingDays
-                        newObj.sources.referral = (monthlyReduced.sources.referral / monthlyReduced.count) * workingDays
-                        newObj.sources.email = (monthlyReduced.sources.email / monthlyReduced.count) * workingDays
-                        newObj.sources.phone = (monthlyReduced.sources.phone / monthlyReduced.count) * workingDays
-                        newObj.sources.walk_in = (monthlyReduced.sources.walk_in / monthlyReduced.count) * workingDays
-                        newObj.sources.service = (monthlyReduced.sources.service / monthlyReduced.count) * workingDays
-                        newObj.sources.house = (monthlyReduced.sources.house / monthlyReduced.count) * workingDays
-                        newObj.sources.repeat = (monthlyReduced.sources.repeat / monthlyReduced.count) * workingDays
-                        newObj.sources.self = (monthlyReduced.sources.self / monthlyReduced.count) * workingDays
-                        newObj.finance = (monthlyReduced.finance / monthlyReduced.count) * workingDays
-                        newObj.vsa = (monthlyReduced.vsa / monthlyReduced.count) * workingDays
-                        newObj.gap = (monthlyReduced.gap / monthlyReduced.count) * workingDays
-                        newObj.ppw = (monthlyReduced.ppw / monthlyReduced.count) * workingDays
-                        newObj.t_w = (monthlyReduced.t_w / monthlyReduced.count) * workingDays
-                        newObj.maintanence = (monthlyReduced.maintanence / monthlyReduced.count) * workingDays
-                        newObj.service.service = (monthlyReduced.service.service / monthlyReduced.count) * serviceDays
-                        newObj.service.per_ro = (monthlyReduced.service.per_ro / monthlyReduced.count) * serviceDays
-                        newObj.service.open_ros = (monthlyReduced.service.open_ros / monthlyReduced.count) * serviceDays
-                        newObj.service.alignments = (monthlyReduced.service.alignments / monthlyReduced.count) * serviceDays
-                        newObj.service.tires = (monthlyReduced.service.tires / monthlyReduced.count) * serviceDays
-                        newObj.shop_hours.day.cp = (monthlyReduced.shop_hours.day.cp / monthlyReduced.count) * serviceDays
-                        newObj.shop_hours.day.w = (monthlyReduced.shop_hours.day.w / monthlyReduced.count) * serviceDays
-                        newObj.shop_hours.day.int = (monthlyReduced.shop_hours.day.int / monthlyReduced.count) * serviceDays
-                        newObj.contact.emails = (monthlyReduced.contact.emails / monthlyReduced.count) * serviceDays
-                        newObj.contact.texts = (monthlyReduced.contact.texts / monthlyReduced.count) * serviceDays
-                        newObj.contact.appointments = (monthlyReduced.contact.appointments / monthlyReduced.count) * serviceDays
-                        newObj.contact.recalls = (monthlyReduced.contact.recalls / monthlyReduced.count) * serviceDays
-                        newObj.p_a.parts = (monthlyReduced.p_a.parts / monthlyReduced.count) * serviceDays
-                        newObj.p_a.accessories = (monthlyReduced.p_a.accessories / monthlyReduced.count) * serviceDays
-                        newObj.wholesale.units = (monthlyReduced.wholesale.units / monthlyReduced.count) * workingDays
-                        newObj.wholesale.amount = (monthlyReduced.wholesale.amount / monthlyReduced.count) * workingDays
+                        newObj.day.units.new = (monthlyReduced.day.units.new / monthlyReduced.count) * workingDays / 10
+                        newObj.day.units.used = (monthlyReduced.day.units.used / monthlyReduced.count) * workingDays / 10
+                        newObj.day.gross.new = (monthlyReduced.day.gross.new / monthlyReduced.count) * workingDays / 10
+                        newObj.day.gross.used = (monthlyReduced.day.gross.used / monthlyReduced.count) * workingDays / 10
+                        newObj.appraisals.acquired = (monthlyReduced.appraisals.acquired / monthlyReduced.count) * workingDays / 10
+                        newObj.appraisals.appraised = (monthlyReduced.appraisals.appraised / monthlyReduced.count) * workingDays / 10
+                        newObj.appointments.shown = (monthlyReduced.appointments.shown / monthlyReduced.count) * workingDays / 10
+                        newObj.appointments.scheduled = (monthlyReduced.appointments.scheduled / monthlyReduced.count) * workingDays / 10
+                        newObj.appointments.walk_ins = (monthlyReduced.appointments.walk_ins / monthlyReduced.count) * workingDays / 10
+                        newObj.appointments.buy_backs = (monthlyReduced.appointments.buy_backs / monthlyReduced.count) * workingDays / 10
+                        newObj.phone_pops.new = (monthlyReduced.phone_pops.new / monthlyReduced.count) * workingDays / 10
+                        newObj.phone_pops.used = (monthlyReduced.phone_pops.used / monthlyReduced.count) * workingDays / 10
+                        newObj.sources.referral = (monthlyReduced.sources.referral / monthlyReduced.count) * workingDays / 10
+                        newObj.sources.email = (monthlyReduced.sources.email / monthlyReduced.count) * workingDays / 10
+                        newObj.sources.phone = (monthlyReduced.sources.phone / monthlyReduced.count) * workingDays / 10
+                        newObj.sources.walk_in = (monthlyReduced.sources.walk_in / monthlyReduced.count) * workingDays / 10
+                        newObj.sources.service = (monthlyReduced.sources.service / monthlyReduced.count) * workingDays / 10
+                        newObj.sources.house = (monthlyReduced.sources.house / monthlyReduced.count) * workingDays / 10
+                        newObj.sources.repeat = (monthlyReduced.sources.repeat / monthlyReduced.count) * workingDays / 10
+                        newObj.sources.self = (monthlyReduced.sources.self / monthlyReduced.count) * workingDays / 10
+                        newObj.finance = (monthlyReduced.finance / monthlyReduced.count) * workingDays / 10
+                        newObj.vsa = (monthlyReduced.vsa / monthlyReduced.count) * workingDays / 10
+                        newObj.gap = (monthlyReduced.gap / monthlyReduced.count) * workingDays / 10
+                        newObj.ppw = (monthlyReduced.ppw / monthlyReduced.count) * workingDays / 10 
+                        newObj.t_w = (monthlyReduced.t_w / monthlyReduced.count) * workingDays / 10
+                        newObj.maintanence = (monthlyReduced.maintanence / monthlyReduced.count) * workingDays / 10
+                        newObj.service.service = (monthlyReduced.service.service / monthlyReduced.count) * serviceDays / 10
+                        newObj.service.per_ro = (monthlyReduced.service.per_ro / monthlyReduced.count) * serviceDays / 10
+                        newObj.service.open_ros = (monthlyReduced.service.open_ros / monthlyReduced.count) * serviceDays / 10
+                        newObj.service.alignments = (monthlyReduced.service.alignments / monthlyReduced.count) * serviceDays / 10
+                        newObj.service.tires = (monthlyReduced.service.tires / monthlyReduced.count) * serviceDays / 10   
+                        newObj.shop_hours.day.cp = (monthlyReduced.shop_hours.day.cp / monthlyReduced.count) * serviceDays / 10
+                        newObj.shop_hours.day.w = (monthlyReduced.shop_hours.day.w / monthlyReduced.count) * serviceDays / 10
+                        newObj.shop_hours.day.int = (monthlyReduced.shop_hours.day.int / monthlyReduced.count) * serviceDays / 10
+                        newObj.contact.emails = (monthlyReduced.contact.emails / monthlyReduced.count) * serviceDays / 10
+                        newObj.contact.texts = (monthlyReduced.contact.texts / monthlyReduced.count) * serviceDays / 10
+                        newObj.contact.appointments = (monthlyReduced.contact.appointments / monthlyReduced.count) * serviceDays / 10
+                        newObj.contact.recalls = (monthlyReduced.contact.recalls / monthlyReduced.count) * serviceDays / 10
+                        newObj.p_a.parts = (monthlyReduced.p_a.parts / monthlyReduced.count) * serviceDays / 10
+                        newObj.p_a.accessories = (monthlyReduced.p_a.accessories / monthlyReduced.count) * serviceDays / 10
+                        newObj.wholesale.units = (monthlyReduced.wholesale.units / monthlyReduced.count) * workingDays / 10
+                        newObj.wholesale.amount = (monthlyReduced.wholesale.amount / monthlyReduced.count) * workingDays / 10
 
                         return newObj
                     })

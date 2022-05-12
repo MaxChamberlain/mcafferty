@@ -1,3 +1,14 @@
+// add gross/day and pvr/day manual
+
+// add bdc section for emails/ calls
+// change emails to emails in and out ALSO for calls -> phone
+
+// add cant submit without date / DONE ///////////////////////////////////////////////
+
+// add datepicker / DONE ///////////////////////////////////////////////////////////////
+
+// everything in pace tab is *10 too much / DONE ///////////////////////////////////////////////////////////////////////////////
+
 import SubHeader from './SubHeader'
 import Row from './Row'
 import EditRow from './EditRow'
@@ -234,8 +245,8 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                             >
                                 
                                 <SubHeader columns={[['', 1], ['Units', 2], ['Gross', 2]]} />
-                                <Row columns={[['New', 1], [data.day.units.new, 2], [data.day.gross.new, 2]]} />
-                                <Row columns={[['Used', 1], [data.day.units.used, 2], [data.day.gross.used, 2]]} />
+                                <Row columns={[['New', 1], [data.day.units.new, 2], [new Intl.NumberFormat('en-US').format(data.day.gross.new), 2]]} />
+                                <Row columns={[['Used', 1], [data.day.units.used, 2], [new Intl.NumberFormat('en-US').format(data.day.gross.used), 2]]} />
                     
                                 <SubHeader columns={[['Appraisals']]}/>
                                 <SubHeader columns={[['Acquired', 2], ['Appraised', 2], ['%', 1]]}/>
@@ -246,6 +257,11 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                                 <Row columns={[['Walk Ins', 1], [data.appointments.walk_ins, 2], ['', 3]]} />
                                 <Row columns={[['BBacks', 1], [data.appointments.buy_backs, 2], ['', 3]]}/>
                                 <Row columns={[['TOTAL', 1], [parseInt(data.appointments.shown) + parseInt(data.appointments.buy_backs) + parseInt(data.appointments.walk_ins), 2], ['', 2], ['', 1]]} />
+
+                                <SubHeader columns={[['PH. Pops', 1]]} />
+                                <Row columns={[['New', 1], [data.phone_pops.new, 2]]} />
+                                <Row columns={[['Used', 1], [data.phone_pops.used, 2]]} />
+                                <Row columns={[['TOTAL', 1], [parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used), 2]]} />
 
                                 <SubHeader columns={[['Sources', 1]]} />
                                 <Row columns={[['Referral', 1], [data.sources.referral, 2]]} />
@@ -258,16 +274,11 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                                 <Row columns={[['Self Generated', 1], [data.sources.self, 2]]} />
                                 <Row columns={[['Total', 1], [Object.values(data.sources).reduce((total, currentValue) => total = total + parseInt(currentValue),0), 2]]} />
 
-                                <SubHeader columns={[['PH. Pops', 1]]} />
-                                <Row columns={[['New', 1], [data.phone_pops.new, 2]]} />
-                                <Row columns={[['Used', 1], [data.phone_pops.used, 2]]} />
-                                <Row columns={[['TOTAL', 1], [parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used), 2]]} />
-
                                 <SubHeader columns={[['Finance', 1],['VSA', 1],['GAP', 1],['PPW', 1],['T&W', 1],['Maint.', 1],['Closing %', 1]]} />
                                 <Row columns={[[data.finance, 1],[data.vsa, 1],[data.gap, 1],[data.ppw, 1],[data.t_w, 1],[data.maintanence, 1],[(((parseInt(data.day.units.new) + parseInt(data.day.units.used)) / (parseInt(data.appointments.walk_ins) + parseInt(data.appointments.buy_backs) + parseInt(data.appointments.shown) + parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used))) * 100).toFixed(2) + '%', 1]]} />
 
                                 <SubHeader columns={[['Service', 1],['$ Per RO', 1],['Alignment', 1],['Tires', 1], ['Open ROs', 1]]} />
-                                <Row columns={[[data.service.service, 1],[data.service.per_ro, 1],[data.service.alignments, 1],[data.service.tires, 1],[parseInt(data.service.open_ros), 1]]} />
+                                <Row columns={[[new Intl.NumberFormat('en-US').format(data.service.service), 1],[new Intl.NumberFormat('en-US').format(data.service.per_ro), 1],[data.service.alignments, 1],[data.service.tires, 1],[parseInt(data.service.open_ros), 1]]} />
 
                                 <SubHeader columns={[['Shop Hours', 1]]} />
                                 <Row columns={[['Day-CP', 1],[data.shop_hours.day.cp, 1]]} />
@@ -279,11 +290,11 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                                 <Row columns={[[data.contact.emails, 1], [data.contact.texts, 1], [data.contact.appointments, 1], [data.contact.recalls, 1]]} />
 
                                 <SubHeader columns={[['Parts', 1], ['Accessories', 1]]} />
-                                <Row columns={[[data.p_a.parts, 1],[data.p_a.accessories, 1]]} />
+                                <Row columns={[[new Intl.NumberFormat('en-US').format(data.p_a.parts), 1],[data.p_a.accessories, 1]]} />
 
                                 <SubHeader columns={[['Wholesale', 1]]} />
                                 <Row columns={[['Units', 1],[data.wholesale.units, 2]]} />
-                                <Row columns={[['Amount', 1],[data.wholesale.amount, 2]]} />
+                                <Row columns={[['Amount', 1],[new Intl.NumberFormat('en-US').format(data.wholesale.amount), 2]]} />
 
                             </motion.div>
                         </>

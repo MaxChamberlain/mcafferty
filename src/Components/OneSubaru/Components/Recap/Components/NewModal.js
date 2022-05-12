@@ -2,9 +2,12 @@ import { newDailyRecap } from "../../../../../fetchData/requestDB"
 import SubHeader from './SubHeader'
 import Row from './Row'
 import EditRow from './EditRow'
-import ModalHeader from "./ModalHeader";
+import ModalHeader from "./ModalHeader"
+import React, { useState } from 'react';
+import DatePicker from 'react-date-picker';
 
 export default function NewModal({ setAdding }){
+    const [value, onChange] = useState(new Date());
     return(
         <div 
         id='recap-modal'
@@ -33,10 +36,11 @@ export default function NewModal({ setAdding }){
                     marginRight: 5
                 }}
                 onClick={() => {
-                    console.log(document.getElementById('sources-referral').value)
+                    console.log(document.getElementById('new-modal-date').children[0].children[0].children[0].children[0].value)
+                    document.getElementById('new-modal-date').children[0].children[0].children[0].children[0].value && 
                     importDocument(
                         {
-                            date: document.getElementById('new-modal-date').value,
+                            date: new Date(document.getElementById('new-modal-date').children[0].children[0].children[0].children[0].value).toLocaleDateString('en-US'),
                             units_new: document.getElementById('new-modal-date').value ?? 0,
                             units_new: document.getElementById('daily-units-new').value ?? 0,
                             units_used: document.getElementById('daily-units-used').value ?? 0,
@@ -78,10 +82,10 @@ export default function NewModal({ setAdding }){
                             contact_recalls: document.getElementById('contact-recalls').value ?? 0,
                             p_a_parts: document.getElementById('p_a-parts').value ?? 0,
                             p_a_accessories: document.getElementById('p_a-accessories').value ?? 0,
-                            wholesale_units: document.getElementById('wholesale-units').value,
-                            wholesale_amount: document.getElementById('wholesale-amount').value,
+                            wholesale_units: document.getElementById('wholesale-units').value ?? 0,
+                            wholesale_amount: document.getElementById('wholesale-amount').value ?? 0,
                         }
-                    )
+                    ) &&
                     setAdding(false)
                 }}>
                     Save
@@ -100,7 +104,12 @@ export default function NewModal({ setAdding }){
                 </div>
             </div>
 
-            <ModalHeader>Daily Recap <input id='new-modal-date' placeholder='Enter date'></input></ModalHeader>
+            <ModalHeader>
+                Daily Recap 
+                <div style={{color: 'black !important'}} id='new-modal-date'>
+                    <DatePicker onChange={onChange} value={value}/>
+                </div>
+            </ModalHeader>
 
             <SubHeader columns={[['', 1], ['Units', 2], ['Gross', 2]]} />
             <EditRow columns={[['New', 1], [, 2, 'daily-units-new'], [, 2, 'daily-gross-new']]} />
@@ -116,6 +125,11 @@ export default function NewModal({ setAdding }){
             <EditRow columns={[['Buy Backs', 1], [, 2, 'appointments-buy_backs'], ['', 3]]}/>
             <Row columns={[['TOTAL', 1], ['', 2], ['', 2], ['', 1]]} />
 
+            <SubHeader columns={[['PH. Pops', 1]]} />
+            <EditRow columns={[['New', 1], [, 2, 'ph-pops-new']]} />
+            <EditRow columns={[['Used', 1], [, 2, 'ph-pops-used']]} />
+            <Row columns={[['TOTAL', 1], ['', 2]]} />
+
             <SubHeader columns={[['Sources', 1]]} />
             <EditRow columns={[['Referral', 1], [, 1, 'sources-referral']]} />
             <EditRow columns={[['Email', 1], [, 1, 'sources-email']]} />
@@ -126,11 +140,6 @@ export default function NewModal({ setAdding }){
             <EditRow columns={[['Repeat', 1], [, 1, 'sources-repeat']]} />
             <EditRow columns={[['Self Generated', 1], [, 1, 'sources-self_generated']]} />
             <EditRow columns={[['Total', 1], ['', 2]]} />
-
-            <SubHeader columns={[['PH. Pops', 1]]} />
-            <EditRow columns={[['New', 1], [, 2, 'ph-pops-new']]} />
-            <EditRow columns={[['Used', 1], [, 2, 'ph-pops-used']]} />
-            <Row columns={[['TOTAL', 1], ['', 2]]} />
 
             <SubHeader columns={[['Finance', 1],['VSA', 1],['GAP', 1],['PPW', 1],['T&W', 1],['Maint.', 1],['Closing %', 1]]} />
             <EditRow columns={[[, 1, 'finance'],[, 1, 'vsa'],[, 1, 'gap'],[, 1, 'ppw'],[, 1, 't_w'],[, 1, 'maintanence'],['%', 1]]} />
@@ -200,77 +209,80 @@ export default function NewModal({ setAdding }){
                                     p_a_accessories,
                                     wholesale_units,
                                     wholesale_amount, }){
-        console.log(sources_referral)
+
+        const finalDate = new Date(date)
+        finalDate.setDate(finalDate.getDate() + 1)
+
         await newDailyRecap({
             location: 'one_subaru',
-            date: date,
+            date: finalDate.toLocaleDateString('en-US'),
             day:{
               units: {
-                new: units_new,
-                used: units_used
+                new: units_new ? units_new : 0,
+                used: units_used ? units_used : 0
               },
               gross: {
-                new: gross_new,
-                used: gross_used
+                new: gross_new ? gross_new : 0,
+                used: gross_used ? gross_used : 0
               }
             },
             appraisals: {
-              acquired: appraisals_acquired,
-              appraised: appraisals_appraised
+              acquired: appraisals_acquired ? appraisals_acquired : 0,
+              appraised: appraisals_appraised ? appraisals_appraised : 0
             },
             appointments: {
-              shown: appointments_shown,
-              scheduled: appointments_scheduled,
-              walk_ins: appointments_walk_ins,
-              buy_backs: appointments_buy_backs
+              shown: appointments_shown ? appointments_shown : 0,
+              scheduled: appointments_scheduled ? appointments_scheduled : 0,
+              walk_ins: appointments_walk_ins ? appointments_walk_ins : 0,
+              buy_backs: appointments_buy_backs ? appointments_buy_backs : 0
             },
             phone_pops: {
-              new: phone_pops_new,
-              used: phone_pops_used
+              new: phone_pops_new ? phone_pops_new : 0,
+              used: phone_pops_used ? phone_pops_used : 0
             },
             sources: {
-                referral: sources_referral,
-                email: sources_email,
-                phone: sources_phone,
-                walk_in: sources_walk_in,
-                service: sources_service,
-                house: sources_house,
-                repeat: sources_repeat,
-                self: sources_self
+                referral: sources_referral ? sources_referral : 0,
+                email: sources_email ? sources_email : 0,
+                phone: sources_phone ? sources_phone : 0,
+                walk_in: sources_walk_in ? sources_walk_in : 0,
+                service: sources_service ? sources_service : 0,
+                house: sources_house ? sources_house : 0,
+                repeat: sources_repeat ? sources_repeat : 0,
+                self: sources_self ? sources_self : 0
             },
-            finance: finance,
-            vsa: vsa,
-            gap: gap,
-            ppw: ppw,
-            t_w: t_w,
-            maintanence: maintanence,
+            finance: finance ? finance : 0,
+            vsa: vsa ? vsa : 0,
+            gap: gap ? gap : 0,
+            ppw: ppw ? ppw : 0,
+            t_w: t_w ? t_w : 0,
+            maintanence: maintanence ? maintanence : 0,
             service: {
-                service: service_service,
-                per_ro: service_per_ro,
-                alignments: service_alignments,
-                tires: service_tires,
-                open_ros: service_open_ros
+                service: service_service ? service_service : 0,
+                per_ro: service_per_ro ? service_per_ro : 0,
+                alignments: service_alignments ? service_alignments : 0,
+                tires: service_tires ? service_tires : 0,
+                open_ros: service_open_ros ? service_open_ros : 0
             },
             shop_hours: {
                 day:{
-                    cp: shop_hours_day_cp,
-                    w: shop_hours_day_w,
-                    int: shop_hours_day_int
+                    cp: shop_hours_day_cp ? shop_hours_day_cp : 0,
+                    w: shop_hours_day_w ? shop_hours_day_w : 0,
+                    int: shop_hours_day_int ? shop_hours_day_int : 0
                 }
             },
             contact: {
-                emails: contact_emails,
-                texts: contact_texts,
-                appointments: contact_appointments,
-                recalls: contact_recalls
+                emails: contact_emails ? contact_emails : 0,
+                texts: contact_texts ? contact_texts : 0,
+                appointments: contact_appointments ? contact_appointments : 0,
+                recalls: contact_recalls ? contact_recalls : 0
             },
             p_a: {
-                parts: p_a_parts,
-                accessories: p_a_accessories
+                parts: p_a_parts ? p_a_parts : 0,
+                accessories: p_a_accessories ? p_a_accessories : 0
             },
             wholesale: {
-                units: wholesale_units,
-                amount: wholesale_amount
+                units: wholesale_units ? wholesale_units : 0,
+                amount: wholesale_amount ? wholesale_amount : 0
             }
           });
           window.location.reload()

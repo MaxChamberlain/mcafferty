@@ -4,3 +4,19 @@
     margin-left: 4%;
   }
 }
+
+abbr{
+  color: black !important;
+}
+
+svg[stroke="black"]{
+  stroke: white !important;
+}
+
+input[name='month'], input[name='day'], input[name='year']{
+  color: white;
+}
+
+.react-date-picker__wrapper{
+  border: 1px solid white;
+}
