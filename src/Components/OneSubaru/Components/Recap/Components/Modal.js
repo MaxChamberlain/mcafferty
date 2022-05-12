@@ -1,14 +1,3 @@
-// add gross/day and pvr/day manual
-
-// add bdc section for emails/ calls
-// change emails to emails in and out ALSO for calls -> phone
-
-// add cant submit without date / DONE ///////////////////////////////////////////////
-
-// add datepicker / DONE ///////////////////////////////////////////////////////////////
-
-// everything in pace tab is *10 too much / DONE ///////////////////////////////////////////////////////////////////////////////
-
 import SubHeader from './SubHeader'
 import Row from './Row'
 import EditRow from './EditRow'
@@ -89,7 +78,8 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                                     shop_hours_day_cp: document.getElementById('shop_hours_day_cp').value,
                                     shop_hours_day_w: document.getElementById('shop_hours_day_w').value,
                                     shop_hours_day_int: document.getElementById('shop_hours_day_int').value,
-                                    contact_emails: document.getElementById('contact-emails').value,
+                                    contact_emails_in: document.getElementById('contact-emails-in').value,
+                                    contact_emails_out: document.getElementById('contact-emails-out').value,
                                     contact_texts: document.getElementById('contact-texts').value,
                                     contact_appointments: document.getElementById('contact-appointments').value,
                                     contact_recalls: document.getElementById('contact-recalls').value,
@@ -97,6 +87,8 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                                     p_a_accessories: document.getElementById('p_a-accessories').value,
                                     wholesale_units: document.getElementById('wholesale-units').value,
                                     wholesale_amount: document.getElementById('wholesale-amount').value,
+                                    gross_day: document.getElementById('gross-day').value,
+                                    pvr_day: document.getElementById('pvr-day').value,
                                 }
                             )
                             setEditing(null)
@@ -180,8 +172,9 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                     <EditRow columns={[['Day-INT', 1],[parseInt(data.shop_hours.day.int), 1, 'shop_hours_day_int']]} />
                     <EditRow columns={[['Total', 1],['', 1]]} />
 
-                    <SubHeader columns={[['Emails', 1], ['Texts', 1], ['Appointments', 1], ['Recalls', 1],]} />
-                    <EditRow columns={[[parseInt(data.contact.emails), 1, 'contact-emails'], [parseInt(data.contact.texts), 1, 'contact-texts'], [parseInt(data.contact.appointments), 1, 'contact-appointments'], [parseInt(data.contact.recalls), 1, 'contact-recalls']]} />
+                    <SubHeader columns={[['BDC', 1]]} />
+                    <SubHeader columns={[['Emails In', 1], ['Emails Out', 1], ['Texts', 1], ['Appointments', 1], ['Recalls', 1],]} />
+                    <EditRow columns={[[parseInt(data.contact.emails.in), 1, 'contact-emails-in'], [parseInt(data.contact.emails.out), 1, 'contact-emails-out'], [parseInt(data.contact.texts), 1, 'contact-texts'], [parseInt(data.contact.appointments), 1, 'contact-appointments'], [parseInt(data.contact.recalls), 1, 'contact-recalls']]} />
 
                     <SubHeader columns={[['Parts', 1], ['Accessories', 1]]} />
                     <EditRow columns={[[parseInt(data.p_a.parts), 1, 'p_a-parts'],[parseInt(data.p_a.accessories), 1, 'p_a-accessories']]} />
@@ -189,6 +182,9 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                     <SubHeader columns={[['Wholesale', 1]]} />
                     <EditRow columns={[['Units', 1],[parseInt(data.wholesale.units), 2, 'wholesale-units']]} />
                     <EditRow columns={[['Amount', 1],[parseInt(data.wholesale.amount), 2, 'wholesale-amount']]} />
+
+                    <SubHeader columns={[['Gross/Day', 1], ['PVR/Day', 1]]} />
+                    <EditRow columns={[[parseInt(data.gross_pvr.gross), 1, 'gross-day'],[parseInt(data.gross_pvr.pvr), 1, 'pvr-day']]} />
                 </div>
             )
         }else{
@@ -286,8 +282,9 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                                 <Row columns={[['Day-INT', 1],[data.shop_hours.day.int, 1]]} />
                                 <Row columns={[['Total', 1],[parseInt(data.shop_hours.day.cp) + parseInt(data.shop_hours.day.w) + parseInt(data.shop_hours.day.int), 1]]} />
 
-                                <SubHeader columns={[['Emails', 1], ['Texts', 1], ['Appointments', 1], ['Recalls', 1],]} />
-                                <Row columns={[[data.contact.emails, 1], [data.contact.texts, 1], [data.contact.appointments, 1], [data.contact.recalls, 1]]} />
+                                <SubHeader columns={[['BDC', 1]]} />
+                                <SubHeader columns={[['Emails In', 1], ['Emails Out', 1], ['Texts', 1], ['Appointments', 1], ['Recalls', 1],]} />
+                                <Row columns={[[data.contact.emails.in, 1], [data.contact.emails.out, 1], [data.contact.texts, 1], [data.contact.appointments, 1], [data.contact.recalls, 1]]} />
 
                                 <SubHeader columns={[['Parts', 1], ['Accessories', 1]]} />
                                 <Row columns={[[new Intl.NumberFormat('en-US').format(data.p_a.parts), 1],[data.p_a.accessories, 1]]} />
@@ -295,6 +292,9 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                                 <SubHeader columns={[['Wholesale', 1]]} />
                                 <Row columns={[['Units', 1],[data.wholesale.units, 2]]} />
                                 <Row columns={[['Amount', 1],[new Intl.NumberFormat('en-US').format(data.wholesale.amount), 2]]} />
+
+                                <SubHeader columns={[['Gross/Day', 1], ['PVR/Day', 1]]} />
+                                <Row columns={[[data.gross_pvr.gross, 1],[data.gross_pvr.pvr, 1]]} />
 
                             </motion.div>
                         </>
@@ -357,14 +357,17 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                                             shop_hours_day_cp,
                                             shop_hours_day_w,
                                             shop_hours_day_int,
-                                            contact_emails,
+                                            contact_emails_in,
+                                            contact_emails_out,
                                             contact_texts,
                                             contact_appointments,
                                             contact_recalls,
                                             p_a_parts,
                                             p_a_accessories,
                                             wholesale_units,
-                                            wholesale_amount, }){
+                                            wholesale_amount,
+                                            gross_day,
+                                            pvr_day, }){
         await updateDailyRecap(data._id, {
             day:{
               units: {
@@ -421,7 +424,10 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                 }
             },
             contact: {
-                emails: contact_emails ? contact_emails : data.contact.emails,
+                emails: {
+                    in: contact_emails_in ? contact_emails_in : data.contact.emails.in,
+                    out: contact_emails_out ? contact_emails_out : data.contact.emails.out
+                },
                 texts: contact_texts ? contact_texts : data.contact.texts,
                 appointments: contact_appointments ? contact_appointments : data.contact.appointments,
                 recalls: contact_recalls ? contact_recalls : data.contact.recalls,
@@ -433,6 +439,10 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
             wholesale: {
                 units: wholesale_units ? wholesale_units : data.wholesale.units,
                 amount: wholesale_amount ? wholesale_amount : data.wholesale.amount
+            },
+            gross_pvr: {
+                gross: gross_day ? gross_day : data.gross_pvr.day,
+                pvr: pvr_day ? pvr_day : data.gross_pvr.pvr
             }
           });
           window.location.reload()

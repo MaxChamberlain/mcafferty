@@ -76,7 +76,8 @@ export default function NewModal({ setAdding }){
                             shop_hours_day_cp: document.getElementById('shop_hours_day_cp').value ?? 0,
                             shop_hours_day_w: document.getElementById('shop_hours_day_w').value ?? 0,
                             shop_hours_day_int: document.getElementById('shop_hours_day_int').value ?? 0,
-                            contact_emails: document.getElementById('contact-emails').value ?? 0,
+                            contact_emails_in: document.getElementById('contact-emails-in').value ?? 0,
+                            contact_emails_out: document.getElementById('contact-emails-out').value ?? 0,
                             contact_texts: document.getElementById('contact-texts').value ?? 0,
                             contact_appointments: document.getElementById('contact-appointments').value ?? 0,
                             contact_recalls: document.getElementById('contact-recalls').value ?? 0,
@@ -84,6 +85,8 @@ export default function NewModal({ setAdding }){
                             p_a_accessories: document.getElementById('p_a-accessories').value ?? 0,
                             wholesale_units: document.getElementById('wholesale-units').value ?? 0,
                             wholesale_amount: document.getElementById('wholesale-amount').value ?? 0,
+                            gross_day: document.getElementById('gross-day').value ?? 0,
+                            pvr_day: document.getElementById('pvr-day').value ?? 0,
                         }
                     ) &&
                     setAdding(false)
@@ -153,8 +156,9 @@ export default function NewModal({ setAdding }){
             <EditRow columns={[['Day-INT', 1],[, 1, 'shop_hours_day_int']]} />
             <EditRow columns={[['Total', 1],['', 1]]} />
 
-            <SubHeader columns={[['Emails', 1], ['Texts', 1], ['Appointments', 1], ['Recalls', 1],]} />
-            <EditRow columns={[[, 1, 'contact-emails'], [, 1, 'contact-texts'], [, 1, 'contact-appointments'], [, 1, 'contact-recalls']]} />
+            <SubHeader columns={[['BDC', 1]]} />
+            <SubHeader columns={[['Emails In', 1], ['Emails Out', 1], ['Texts', 1], ['Appointments', 1], ['Recalls', 1],]} />
+            <EditRow columns={[[, 1, 'contact-emails-in'], [, 1, 'contact-emails-out'], [, 1, 'contact-texts'], [, 1, 'contact-appointments'], [, 1, 'contact-recalls']]} />
 
             <SubHeader columns={[['Parts', 1], ['Accessories', 1]]} />
             <EditRow columns={[[, 1, 'p_a-parts'],[, 1, 'p_a-accessories']]} />
@@ -162,6 +166,9 @@ export default function NewModal({ setAdding }){
             <SubHeader columns={[['Wholesale', 1]]} />
             <EditRow columns={[['Units', 1],[, 2, 'wholesale-units']]} />
             <EditRow columns={[['Amount', 1],[, 2, 'wholesale-amount']]} />
+
+            <SubHeader columns={[['Gross/Day', 1], ['PVR/Day', 1]]} />
+            <EditRow columns={[[, 1, 'gross-day'], [, 1, 'pvr-day']]} />
 
         </div>
     )
@@ -201,14 +208,17 @@ export default function NewModal({ setAdding }){
                                     shop_hours_day_cp,
                                     shop_hours_day_w,
                                     shop_hours_day_int,
-                                    contact_emails,
+                                    contact_emails_in,
+                                    contact_emails_out,
                                     contact_texts,
                                     contact_appointments,
                                     contact_recalls,
                                     p_a_parts,
                                     p_a_accessories,
                                     wholesale_units,
-                                    wholesale_amount, }){
+                                    wholesale_amount,
+                                    gross_day,
+                                    pvr_day, }){
 
         const finalDate = new Date(date)
         finalDate.setDate(finalDate.getDate() + 1)
@@ -271,7 +281,10 @@ export default function NewModal({ setAdding }){
                 }
             },
             contact: {
-                emails: contact_emails ? contact_emails : 0,
+                emails: {
+                    in: contact_emails_in ? contact_emails_in : 0,
+                    out: contact_emails_out ? contact_emails_out : 0
+                },
                 texts: contact_texts ? contact_texts : 0,
                 appointments: contact_appointments ? contact_appointments : 0,
                 recalls: contact_recalls ? contact_recalls : 0
@@ -283,6 +296,10 @@ export default function NewModal({ setAdding }){
             wholesale: {
                 units: wholesale_units ? wholesale_units : 0,
                 amount: wholesale_amount ? wholesale_amount : 0
+            },
+            gross_pvr: {
+                gross: gross_day ? gross_day : 0,
+                pvr: pvr_day ? pvr_day : 0
             }
           });
           window.location.reload()

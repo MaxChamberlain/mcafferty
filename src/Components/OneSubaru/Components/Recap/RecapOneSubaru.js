@@ -89,7 +89,10 @@ export default function RecapOneSubaru(){
                     }
                 },
                 contact: {
-                    emails: 0,
+                    emails: {
+                        in: 0,
+                        out: 0
+                    },
                     texts: 0,
                     appointments: 0,
                     recalls: 0
@@ -101,6 +104,10 @@ export default function RecapOneSubaru(){
                 wholesale: {
                     units: 0,
                     amount: 0
+                },
+                gross_pvr: {
+                    gross: 0,
+                    pvr: 0
                 }
             })
 
@@ -144,7 +151,8 @@ export default function RecapOneSubaru(){
                         newObj.shop_hours.day.cp +=  parseInt(curr.shop_hours.day.cp)
                         newObj.shop_hours.day.w +=  parseInt(curr.shop_hours.day.w)
                         newObj.shop_hours.day.int +=  parseInt(curr.shop_hours.day.int)
-                        newObj.contact.emails +=  parseInt(curr.contact.emails)
+                        newObj.contact.emails.in +=  parseInt(curr.contact.emails.in)
+                        newObj.contact.emails.out +=  parseInt(curr.contact.emails.out)
                         newObj.contact.texts +=  parseInt(curr.contact.texts)
                         newObj.contact.appointments +=  parseInt(curr.contact.appointments)
                         newObj.contact.recalls +=  parseInt(curr.contact.recalls)
@@ -152,6 +160,8 @@ export default function RecapOneSubaru(){
                         newObj.p_a.accessories +=  parseInt(curr.p_a.accessories)  
                         newObj.wholesale.units +=  parseInt(curr.wholesale.units)
                         newObj.wholesale.amount +=  parseInt(curr.wholesale.amount) 
+                        newObj.gross_pvr.gross +=  parseInt(curr.gross_pvr.gross)
+                        newObj.gross_pvr.pvr +=  parseInt(curr.gross_pvr.pvr)
                         newObj.count++
 
                         return newObj
@@ -220,7 +230,10 @@ export default function RecapOneSubaru(){
                     }
                 },
                 contact: {
-                    emails: 0,
+                    emails: {
+                        in: 0,
+                        out: 0
+                    },
                     texts: 0,
                     appointments: 0,
                     recalls: 0
@@ -232,6 +245,10 @@ export default function RecapOneSubaru(){
                 wholesale: {
                     units: 0,
                     amount: 0
+                },
+                gross_pvr: {
+                    gross: 0,
+                    pvr: 0
                 }
             })
 
@@ -276,7 +293,8 @@ export default function RecapOneSubaru(){
                         newObj.shop_hours.day.cp = (monthlyReduced.shop_hours.day.cp / monthlyReduced.count) * serviceDays / 10
                         newObj.shop_hours.day.w = (monthlyReduced.shop_hours.day.w / monthlyReduced.count) * serviceDays / 10
                         newObj.shop_hours.day.int = (monthlyReduced.shop_hours.day.int / monthlyReduced.count) * serviceDays / 10
-                        newObj.contact.emails = (monthlyReduced.contact.emails / monthlyReduced.count) * serviceDays / 10
+                        newObj.contact.emails.in = (monthlyReduced.contact.emails.in / monthlyReduced.count) * serviceDays / 10
+                        newObj.contact.emails.out = (monthlyReduced.contact.emails.out / monthlyReduced.count) * serviceDays / 10
                         newObj.contact.texts = (monthlyReduced.contact.texts / monthlyReduced.count) * serviceDays / 10
                         newObj.contact.appointments = (monthlyReduced.contact.appointments / monthlyReduced.count) * serviceDays / 10
                         newObj.contact.recalls = (monthlyReduced.contact.recalls / monthlyReduced.count) * serviceDays / 10
@@ -284,6 +302,8 @@ export default function RecapOneSubaru(){
                         newObj.p_a.accessories = (monthlyReduced.p_a.accessories / monthlyReduced.count) * serviceDays / 10
                         newObj.wholesale.units = (monthlyReduced.wholesale.units / monthlyReduced.count) * workingDays / 10
                         newObj.wholesale.amount = (monthlyReduced.wholesale.amount / monthlyReduced.count) * workingDays / 10
+                        newObj.gross_pvr.gross = (monthlyReduced.gross_pvr.gross / monthlyReduced.count) * workingDays / 10
+                        newObj.gross_pvr.pvr = (monthlyReduced.gross_pvr.pvr / monthlyReduced.count) * workingDays / 10
 
                         return newObj
                     })
