@@ -54,7 +54,7 @@ export default function EditRow({ columns }){
                                 opacity: 0.8
                             }}
                             activeModalInput="recap">
-                                Previous: {e[0]}
+                                Previous: {new Intl.NumberFormat('en-US').format(e[0])}
                             </div>
                         </>}
                     </div>
