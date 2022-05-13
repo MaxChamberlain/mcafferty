@@ -41,7 +41,7 @@ export default function EditRow({ columns }){
                             onBlur={() => {setFocused(null)}}
                             onKeyDown={e => numberOnly(e)} />
                             <div style={{
-                                display: focused === e[2] ? 'block' : 'none',
+                                display: (focused === e[2] && e[0]) ? 'block' : 'none',
                                 position: 'absolute',
                                 top: '100%',
                                 right: 0,
