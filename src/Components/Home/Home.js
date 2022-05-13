@@ -24,8 +24,8 @@ export default function Home(){
             bottom: 0,
         }}>
         <NavLink to={`/oneauto`} style={{
-            width: '100vw',
-            height: 200,
+            width: '95vw',
+            height: 100,
             borderRadius: 5,
             fontSize: 30,
             fontWeight: 'bold',
@@ -35,7 +35,9 @@ export default function Home(){
             color: 'black',
             textDecoration: 'none',
             position: 'relative',
-            marginBottom: 10,
+            marginTop: 10,
+            marginBottom: 20,
+            marginLeft: '2.5vw',
         }}>
             <motion.div
             id='home-button-nav-container-bg'
@@ -45,11 +47,12 @@ export default function Home(){
                 left: 0,
                 right: 0,
                 bottom: 0,
-                backgroundColor: '#eee',
+                backgroundColor: '#436fb5',
+                borderRadius: 5,
             }}
-            whileHover={{ backgroundColor: '#ccc' }}>
+            whileHover={{ opacity: 0.8 }}>
             </motion.div>
-            <div style={{zIndex: 999, marginTop: 100, height: 200}}>
+            <div style={{zIndex: 999, marginTop: 30, height: 200, color: 'white'}}>
                 One Automotive
             </div>
         </NavLink>
