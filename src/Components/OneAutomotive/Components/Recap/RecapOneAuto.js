@@ -327,7 +327,6 @@ export default function RecapOneAuto(){
             {loading === 1 && <Loading />}
             {loading === 2 && <Success />}
             {loading === 3 && <Failed />}
-            {page === 'day' && <AddButton adding={adding} setAdding={setAdding} />}
 
             <div style={{
                 display: 'flex',
