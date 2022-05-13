@@ -6,7 +6,7 @@ import ModalHeader from "./ModalHeader"
 import React, { useState } from 'react';
 import DatePicker from 'react-date-picker';
 
-export default function NewModal({ setAdding }){
+export default function NewModal({ location, setAdding }){
     const [value, onChange] = useState(new Date());
     return(
         <div 
@@ -224,7 +224,7 @@ export default function NewModal({ setAdding }){
         finalDate.setDate(finalDate.getDate() + 1)
 
         await newDailyRecap({
-            location: 'one_subaru',
+            location: location,
             date: finalDate.toLocaleDateString('en-US'),
             day:{
               units: {

@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 
 export default function Logo(){
     return(
-        <motion.svg height="11" viewBox="0 0 84 11" fill="none" style={{
+        <motion.svg height="11" viewBox="0 0 73 11" fill="none" style={{
             height: 40,
             marginTop: 20,
         }}

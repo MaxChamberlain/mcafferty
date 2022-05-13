@@ -346,7 +346,9 @@ export default function RecapOneAuto(){
                         <div style={{
                             cursor: 'pointer',
                             letterSpacing: page === e[1] ? '1px' : '0px',
-                            color: page === e[1] ? 'black' : '#999'
+                            color: page === e[1] ? 'black' : '#999',
+                            flex: 1,
+                            textAlign: 'center'
                         }}
                         onClick={e[1] !== 'pace' ? () => {setPage(e[1])} : () => {setPage('month'); setTimeout(() => setPage('pace'), 1)}}
                         >

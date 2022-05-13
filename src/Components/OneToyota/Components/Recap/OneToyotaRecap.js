@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import AddButton from './Components/AddButton'
-import Modal from './Components/Modal'
-import WeekendModal from './Components/WeekendModal'
-import NewModal from './Components/NewModal'
+import AddButton from "../../../OneSubaru/Components/Recap/Components/AddButton";
+import Modal from '../../../OneSubaru/Components/Recap/Components/Modal'
+import WeekendModal from '../../../OneSubaru/Components/Recap/Components/WeekendModal'
+import NewModal from '../../../OneSubaru/Components/Recap/Components/NewModal'
 import { getUser, getDailyRecaps } from "../../../../fetchData/requestDB";
 import {Loading, Failed, Success} from '../../../Loading'
 
-export default function RecapOneSubaru(){
+export default function OneToyotaRecap(){
     const [ perms, setPerms ] = useState(null)
     const [ adding, setAdding ] = useState(false)
     const [ editing, setEditing ] = useState(null)
@@ -372,7 +372,7 @@ export default function RecapOneSubaru(){
                 {perms && <div style={{
                     marginTop: 80,
                 }}>
-                    {adding && <NewModal setAdding={setAdding} location='one_subaru' />}
+                    {adding && <NewModal setAdding={setAdding} location='one_toyota' />}
                     {post && (page !== 'month' && page !== 'pace' ? post.map(e => {
                         return page === 'day' ? 
                             <Modal selected={selected} setSelected={setSelected} data={e} page={page} perms={perms} setEditing={setEditing} editing={editing} />
@@ -484,7 +484,7 @@ export default function RecapOneSubaru(){
     async function getPost(){
         try{
             setLoading(1)
-            let data = await getDailyRecaps('one_subaru')
+            let data = await getDailyRecaps('one_toyota')
             setPost(data)
             setLoading(2)
             setTimeout(() => {

@@ -303,6 +303,10 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
 
                             {page === 'day' &&
                             <ModalHeader>
+                                <div>
+                                    {data.location.includes('avondale') ? 'Avondale Toyota' : data.location.includes('toyota') ? 'One Toyota' : 'One Subaru'}
+                                </div>
+                                <br />
                                 {selected === data._id ?
                                 <svg onClick={() => setSelected(null)} width="30" height="30" viewBox="0 0 192 192" fill="none">
                                     <rect index={data._id + '-arrow-1'} x="97" y="47" width="92" height="13" rx="6.5" transform="rotate(31.3991 26.7729 67)" fill="white"/>

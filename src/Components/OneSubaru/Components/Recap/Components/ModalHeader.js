@@ -10,6 +10,8 @@ export default function ModalHeader({ children }){
             textAlign: 'center',
             display: 'flex',
             justifyContent: 'space-around',
+            flexDirection: 'column',
+            alignItems: 'center'
         }}>
             {children}
         </div>
