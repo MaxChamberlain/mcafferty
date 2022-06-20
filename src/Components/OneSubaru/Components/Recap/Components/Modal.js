@@ -241,60 +241,60 @@ export default function Modal({ data, editing, setEditing, perms, page, selected
                             >
                                 
                                 <SubHeader columns={[['', 1], ['Units', 2], ['Gross', 2]]} />
-                                <Row columns={[['New', 1], [data.day.units.new.toFixed(2), 2], [new Intl.NumberFormat('en-US').format(data.day.gross.new.toFixed(2)), 2]]} />
-                                <Row columns={[['Used', 1], [data.day.units.used.toFixed(2), 2], [new Intl.NumberFormat('en-US').format(data.day.gross.used.toFixed(2)), 2]]} />
+                                <Row columns={[['New', 1], [parseInt(data.day.units.new).toFixed(2), 2], [new Intl.NumberFormat('en-US').format(parseInt(data.day.gross.new).toFixed(2)), 2]]} />
+                                <Row columns={[['Used', 1], [parseInt(data.day.units.used).toFixed(2), 2], [new Intl.NumberFormat('en-US').format(parseInt(data.day.gross.used).toFixed(2)), 2]]} />
                     
                                 <SubHeader columns={[['Appraisals']]}/>
                                 <SubHeader columns={[['Acquired', 2], ['Appraised', 2], ['%', 1]]}/>
-                                <Row columns={[[data.appraisals.acquired.toFixed(2), 2], [data.appraisals.appraised.toFixed(2), 2], [(parseInt(data.appraisals.acquired) * 100 / parseInt(data.appraisals.appraised)).toFixed(2) + '%', 1]]} />
+                                <Row columns={[[parseInt(data.appraisals.acquired).toFixed(2), 2], [parseInt(data.appraisals.appraised).toFixed(2), 2], [(parseInt(data.appraisals.acquired) * 100 / parseInt(data.appraisals.appraised)).toFixed(2) + '%', 1]]} />
                     
                                 <SubHeader columns={[['', 1], ['Shown', 2], ['Scheduled', 2], ['%', 1]]} />
-                                <Row columns={[['Appointments', 1], [data.appointments.shown.toFixed(2), 2], [data.appointments.scheduled.toFixed(2), 2], [(parseInt(data.appointments.shown) * 100 / parseInt(data.appointments.scheduled)).toFixed(2) + '%', 1]]} />
-                                <Row columns={[['Walk Ins', 1], [data.appointments.walk_ins.toFixed(2), 2], ['', 3]]} />
-                                <Row columns={[['BBacks', 1], [data.appointments.buy_backs.toFixed(2), 2], ['', 3]]}/>
-                                <Row columns={[['TOTAL', 1], [(parseInt(data.appointments.shown.toFixed(2)) + parseInt(data.appointments.buy_backs) + parseInt(data.appointments.walk_ins)).toFixed(2), 2], ['', 2], ['', 1]]} />
+                                <Row columns={[['Appointments', 1], [parseInt(data.appointments.shown).toFixed(2), 2], [parseInt(data.appointments.scheduled).toFixed(2), 2], [(parseInt(data.appointments.shown) * 100 / parseInt(data.appointments.scheduled)).toFixed(2) + '%', 1]]} />
+                                <Row columns={[['Walk Ins', 1], [parseInt(data.appointments.walk_ins).toFixed(2), 2], ['', 3]]} />
+                                <Row columns={[['BBacks', 1], [parseInt(data.appointments.buy_backs).toFixed(2), 2], ['', 3]]}/>
+                                <Row columns={[['TOTAL', 1], [(parseInt(data.appointments.shown) + parseInt(data.appointments.buy_backs) + parseInt(data.appointments.walk_ins)).toFixed(2), 2], ['', 2], ['', 1]]} />
 
                                 <SubHeader columns={[['PH. Pops', 1]]} />
-                                <Row columns={[['New', 1], [data.phone_pops.new.toFixed(2), 2]]} />
-                                <Row columns={[['Used', 1], [data.phone_pops.used.toFixed(2), 2]]} />
-                                <Row columns={[['TOTAL', 1], [parseInt(data.phone_pops.new.toFixed(2)) + parseInt(data.phone_pops.used), 2]]} />
+                                <Row columns={[['New', 1], [parseInt(data.phone_pops.new).toFixed(2), 2]]} />
+                                <Row columns={[['Used', 1], [parseInt(data.phone_pops.used).toFixed(2), 2]]} />
+                                <Row columns={[['TOTAL', 1], [parseInt(data.phone_pops.new).toFixed(2) + parseInt(data.phone_pops.used), 2]]} />
 
                                 <SubHeader columns={[['Sources', 1]]} />
-                                <Row columns={[['Referral', 1], [data.sources.referral.toFixed(2), 2]]} />
-                                <Row columns={[['Email', 1], [data.sources.email.toFixed(2), 2]]} />
-                                <Row columns={[['Phone', 1], [data.sources.phone.toFixed(2), 2]]} />
-                                <Row columns={[['Walk In', 1], [data.sources.walk_in.toFixed(2), 2]]} />
-                                <Row columns={[['Service', 1], [data.sources.service.toFixed(2), 2]]} />
-                                <Row columns={[['House', 1], [data.sources.house.toFixed(2), 2]]} />
-                                <Row columns={[['Repeat', 1], [data.sources.repeat.toFixed(2), 2]]} />
-                                <Row columns={[['Self Generated', 1], [data.sources.self.toFixed(2), 2]]} />
+                                <Row columns={[['Referral', 1], [parseInt(data.sources.referral).toFixed(2), 2]]} />
+                                <Row columns={[['Email', 1], [parseInt(data.sources.email).toFixed(2), 2]]} />
+                                <Row columns={[['Phone', 1], [parseInt(data.sources.phone).toFixed(2), 2]]} />
+                                <Row columns={[['Walk In', 1], [parseInt(data.sources.walk_in).toFixed(2), 2]]} />
+                                <Row columns={[['Service', 1], [parseInt(data.sources.service).toFixed(2), 2]]} />
+                                <Row columns={[['House', 1], [parseInt(data.sources.house).toFixed(2), 2]]} />
+                                <Row columns={[['Repeat', 1], [parseInt(data.sources.repeat).toFixed(2), 2]]} />
+                                <Row columns={[['Self Generated', 1], [parseInt(data.sources.self).toFixed(2), 2]]} />
                                 <Row columns={[['Total', 1], [Object.values(data.sources).reduce((total, currentValue) => total = total + parseInt(currentValue),0).toFixed(2), 2]]} />
 
                                 <SubHeader columns={[['Finance', 1],['VSA', 1],['GAP', 1],['PPW', 1],['T&W', 1],['Maint.', 1],['Closing %', 1]]} />
-                                <Row columns={[[data.finance.toFixed(2), 1],[data.vsa.toFixed(2), 1],[data.gap.toFixed(2), 1],[data.ppw.toFixed(2), 1],[data.t_w.toFixed(2), 1],[data.maintanence.toFixed(2), 1],[(((parseInt(data.day.units.new) + parseInt(data.day.units.used)) / (parseInt(data.appointments.walk_ins) + parseInt(data.appointments.buy_backs) + parseInt(data.appointments.shown) + parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used))) * 100).toFixed(2) + '%', 1]]} />
+                                <Row columns={[[parseInt(data.finance).toFixed(2), 1],[parseInt(data.vsa).toFixed(2), 1],[parseInt(data.gap).toFixed(2), 1],[parseInt(data.ppw).toFixed(2), 1],[parseInt(data.t_w).toFixed(2), 1],[parseInt(data.maintanence).toFixed(2), 1],[(((parseInt(data.day.units.new) + parseInt(data.day.units.used)) / (parseInt(data.appointments.walk_ins) + parseInt(data.appointments.buy_backs) + parseInt(data.appointments.shown) + parseInt(data.phone_pops.new) + parseInt(data.phone_pops.used))) * 100).toFixed(2) + '%', 1]]} />
 
                                 <SubHeader columns={[['Service', 1],['$ Per RO', 1],['Alignment', 1],['Tires', 1], ['Open ROs', 1]]} />
-                                <Row columns={[[new Intl.NumberFormat('en-US').format(data.service.service.toFixed(2)), 1],[new Intl.NumberFormat('en-US').format(data.service.per_ro.toFixed(2)), 1],[data.service.alignments, 1],[data.service.tires, 1],[parseInt(data.service.open_ros), 1]]} />
+                                <Row columns={[[new Intl.NumberFormat('en-US').format(parseInt(data.service.service).toFixed(2)), 1],[new Intl.NumberFormat('en-US').format(parseInt(data.service.per_ro).toFixed(2)), 1],[parseInt(data.service.alignments), 1],[parseInt(data.service.tires), 1],[parseInt(data.service.open_ros), 1]]} />
 
                                 <SubHeader columns={[['Shop Hours', 1]]} />
-                                <Row columns={[['Day-CP', 1],[data.shop_hours.day.cp.toFixed(2), 1]]} />
-                                <Row columns={[['Day-W', 1],[data.shop_hours.day.w.toFixed(2), 1]]} />
-                                <Row columns={[['Day-INT', 1],[data.shop_hours.day.int.toFixed(2), 1]]} />
+                                <Row columns={[['Day-CP', 1],[parseInt(data.shop_hours.day.cp).toFixed(2), 1]]} />
+                                <Row columns={[['Day-W', 1],[parseInt(data.shop_hours.day.w).toFixed(2), 1]]} />
+                                <Row columns={[['Day-INT', 1],[parseInt(data.shop_hours.day.int).toFixed(2), 1]]} />
                                 <Row columns={[['Total', 1],[parseInt(data.shop_hours.day.cp) + parseInt(data.shop_hours.day.w) + parseInt(data.shop_hours.day.int), 1]]} />
 
                                 <SubHeader columns={[['BDC', 1]]} />
                                 <SubHeader columns={[['Emails In', 1], ['Emails Out', 1], ['Texts', 1], ['Appointments', 1], ['Recalls', 1],]} />
-                                <Row columns={[[data.contact.emails.in.toFixed(2), 1], [data.contact.emails.out.toFixed(2), 1], [data.contact.texts.toFixed(2), 1], [data.contact.appointments.toFixed(2), 1], [data.contact.recalls.toFixed(2), 1]]} />
+                                <Row columns={[[parseInt(data.contact.emails.in).toFixed(2), 1], [parseInt(data.contact.emails.out).toFixed(2), 1], [parseInt(data.contact.texts).toFixed(2), 1], [parseInt(data.contact.appointments).toFixed(2), 1], [parseInt(data.contact.recalls).toFixed(2), 1]]} />
 
                                 <SubHeader columns={[['Parts', 1], ['Accessories', 1]]} />
-                                <Row columns={[[new Intl.NumberFormat('en-US').format(data.p_a.parts.toFixed(2)), 1],[data.p_a.accessories.toFixed(2), 1]]} />
+                                <Row columns={[[new Intl.NumberFormat('en-US').format(parseInt(data.p_a.parts).toFixed(2)), 1],[parseInt(data.p_a.accessories).toFixed(2), 1]]} />
 
                                 <SubHeader columns={[['Wholesale', 1]]} />
-                                <Row columns={[['Units', 1],[data.wholesale.units.toFixed(2), 2]]} />
-                                <Row columns={[['Amount', 1],[new Intl.NumberFormat('en-US').format(data.wholesale.amount.toFixed(2)), 2]]} />
+                                <Row columns={[['Units', 1],[parseInt(data.wholesale.units).toFixed(2), 2]]} />
+                                <Row columns={[['Amount', 1],[new Intl.NumberFormat('en-US').format(parseInt(data.wholesale.amount).toFixed(2)), 2]]} />
 
                                 <SubHeader columns={[['Gross/Day', 1], ['PVR/Day', 1]]} />
-                                <Row columns={[[data.gross_pvr.gross.toFixed(2), 1],[data.gross_pvr.pvr.toFixed(2), 1]]} />
+                                <Row columns={[[parseInt(data.gross_pvr.gross).toFixed(2), 1],[parseInt(data.gross_pvr.pvr).toFixed(2), 1]]} />
 
                             </motion.div>
                         </>
